@@ -2,7 +2,7 @@
   <q-layout view="hHr Lpr lff">
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="() => store.ToggleDrawerOpen()" />
+        <q-btn dense flat round icon="menu" @click="() => store.ToggleDrawer()" />
 
         <q-toolbar-title>
           <q-avatar>

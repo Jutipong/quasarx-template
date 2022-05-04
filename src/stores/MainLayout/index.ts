@@ -32,7 +32,7 @@ export const useMainLayoutStore = defineStore('mainLayout', {
     Add(menu: Menu) {
       this.Menus.push(menu);
     },
-    ToggleDrawerOpen() {
+    ToggleDrawer() {
       console.log('ToggleDrawerOpen: ', this.DrawerOpen);
       this.DrawerOpen = !this.DrawerOpen;
     },
