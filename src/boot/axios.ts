@@ -15,7 +15,7 @@ declare module '@vue/runtime-core' {
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-const api = axios.create({ baseURL: process.env.Base_URL });
+const api = axios.create({ baseURL: process.env.BASE_URL });
 
 export default boot(({ app, router }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
@@ -44,7 +44,7 @@ export default boot(({ app, router }) => {
       return response;
     },
     async function (error) {
-      const originalRequest = error.config;
+      // const originalRequest = error.config;
 
       const defaultNotify = {
         message: 'ความผิดพลาดที่ไม่ทราบสาเหตุ',

@@ -39,7 +39,6 @@ export default defineComponent({
       totalCount: 1200,
     });
 
-    console.log('BASE_URL: ', process.env.BASE_URL);
     return { todos, meta };
   },
 });
