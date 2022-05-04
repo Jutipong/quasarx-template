@@ -17,15 +17,15 @@
       <q-scroll-area class="fit">
         <q-list>
           <template v-for="(menuItem, index) in menuList" :key="index">
-            <q-item clickable :active="menuItem.label === 'Outbox'" v-ripple :to="menuItem.to">
+            <q-item clickable :active="menuItem.Label === 'Outbox'" v-ripple :to="menuItem.To">
               <q-item-section avatar>
-                <q-icon :name="menuItem.icon" />
+                <q-icon :name="menuItem.Icon" />
               </q-item-section>
               <q-item-section>
-                {{ menuItem.label }}
+                {{ menuItem.Label }}
               </q-item-section>
             </q-item>
-            <q-separator :key="'sep' + index" v-if="menuItem.separator" />
+            <q-separator :key="'sep' + index" v-if="menuItem.Separator" />
           </template>
         </q-list>
       </q-scroll-area>
@@ -39,29 +39,12 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-const menuList = [
-  {
-    icon: 'inbox',
-    label: 'Inbox',
-    separator: true,
-    to: '/',
-  },
-  {
-    icon: 'send',
-    label: 'Home',
-    separator: false,
-    to: 'home',
-  },
-  {
-    icon: 'delete',
-    label: 'Login',
-    separator: false,
-    to: 'login',
-  },
-];
+import { useMainLayoutStore } from '../stores/MainLayout';
 export default defineComponent({
   name: 'MainLayout',
   setup() {
+    const store = useMainLayoutStore();
+    const menuList = store.menus;
     const leftDrawerOpen = ref(false);
     return {
       menuList,
