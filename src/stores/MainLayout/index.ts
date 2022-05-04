@@ -3,6 +3,7 @@ import { MainLayout, Menu } from './type';
 
 export const useMainLayoutStore = defineStore('mainLayout', {
   state: (): MainLayout => ({
+    DrawerOpen: false,
     Menus: [
       {
         Icon: 'inbox',
@@ -30,6 +31,10 @@ export const useMainLayoutStore = defineStore('mainLayout', {
   actions: {
     Add(menu: Menu) {
       this.Menus.push(menu);
+    },
+    ToggleDrawerOpen() {
+      console.log('ToggleDrawerOpen: ', this.DrawerOpen);
+      this.DrawerOpen = !this.DrawerOpen;
     },
   },
 });

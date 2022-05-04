@@ -2,7 +2,7 @@
   <q-layout view="hHr Lpr lff">
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="() => (leftDrawerOpen = !leftDrawerOpen)" />
+        <q-btn dense flat round icon="menu" @click="() => store.ToggleDrawerOpen()" />
 
         <q-toolbar-title>
           <q-avatar>
@@ -13,10 +13,10 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer show-if-above v-model="leftDrawerOpen" side="left" elevated :width="240" bordered>
+    <q-drawer show-if-above v-model="store.DrawerOpen" side="left" elevated :width="240" bordered>
       <q-scroll-area class="fit">
         <q-list>
-          <template v-for="(menuItem, index) in menuList" :key="index">
+          <template v-for="(menuItem, index) in store.Menus" :key="index">
             <q-item clickable :active="menuItem.Label === 'Outbox'" v-ripple :to="menuItem.To">
               <q-item-section avatar>
                 <q-icon :name="menuItem.Icon" />
@@ -38,17 +38,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 import { useMainLayoutStore } from '../stores/MainLayout';
 export default defineComponent({
   name: 'MainLayout',
   setup() {
-    const store = useMainLayoutStore();
-    const menuList = store.menus;
-    const leftDrawerOpen = ref(false);
     return {
-      menuList,
-      leftDrawerOpen,
+      store: useMainLayoutStore(),
     };
   },
 });
