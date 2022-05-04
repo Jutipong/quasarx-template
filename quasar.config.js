@@ -69,14 +69,14 @@ module.exports = configure(function (/* ctx */) {
       // polyfillModulePreload: true,
       // distDir
 
-      extendViteConf(viteConf) {},
+      // extendViteConf(viteConf) {
+
+      // },
       viteVuePluginOptions: {
         reactivityTransform: true,
       },
 
-      // vitePlugins: [
-      //   [ 'package-name', { ..options.. } ]
-      // ]
+      // vitePlugins: [['package-name', { 'server.hmr.overlay': false }]],
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
