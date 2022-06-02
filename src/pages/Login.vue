@@ -1,58 +1,176 @@
 <template>
-  <q-page class="window-height window-width row justify-center items-center" style="background: linear-gradient(135deg, #ea5c54 0%, #bb6dec 100%)">
-    <div class="column">
-      <div class="row">
-        <q-card square dark class="q-pa-md q-ma-none no-shadow bg-grey-10" style="width: 320px">
-          <q-card-section class="q-mt-xl q-mb-md">
-            <p class="text-weight-bolder text-grey">Login to your account</p>
-          </q-card-section>
-          <q-card-section>
-            <q-form class="q-gutter-md">
-              <q-input dark dense square filled clearable v-model="username" type="text" label="Username">
-                <template v-slot:prepend>
-                  <q-icon name="eva-person-outline" />
-                </template>
-              </q-input>
-              <q-input dark dense square filled clearable v-model="password" type="password" label="Password">
-                <template v-slot:prepend>
-                  <q-icon name="lock" />
-                </template>
-              </q-input>
-            </q-form>
-          </q-card-section>
-          <q-card-actions>
-            <div class="row full-width items-center q-mb-xl">
-              <div class="col-12">
-                <q-btn outline rounded size="md" color="red-4" class="full-width text-white" label="Sign In" />
-              </div>
-              <!-- <div class="col-6">
-                <p class="text-no-wrap text-grey text-caption text-right">Forgot password?</p>
-              </div> -->
+  <div class="flex justify-center items-center q-electron-drag" style="height: 100%">
+    <div class="row base-card-shadow electron-hide" style="width: 60vw; min-width: 300px">
+      <div class="col-6 flex justify-center items-center" v-show="$q.screen.gt.sm">
+        <q-skeleton type="text" height="70%" width="50%" v-if="!isLottieF" />
+        <lottie-web-cimo align="right" style="height: 70%" :path="defaultOptions.path" @isLottieFinish="handleFinish" />
+      </div>
+      <q-separator vertical inset v-if="$q.screen.gt.sm" />
+      <div class="col flex justify-center items-center">
+        <q-card square style="min-width: 290px; height: 100%; width: 60%" class="no-shadow">
+          <q-card-section align="center">
+            <h3 class="text-uppercase">cimo</h3>
+            <!-- 用户名 -->
+            <q-input class="logon-input" clearable standout="bg-cyan text-white" bottom-slots v-model="username" label="账号">
+              <template v-slot:prepend>
+                <q-icon name="account_circle" />
+              </template>
+            </q-input>
+            <!-- 密码 -->
+            <q-input class="logon-input" standout="bg-cyan text-white" bottom-slots v-model="password" label="密码" :type="isPwd ? 'password' : 'text'" hint="">
+              <template v-slot:prepend>
+                <q-icon name="vpn_key" />
+              </template>
+              <template v-slot:append>
+                <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd" />
+              </template>
+            </q-input>
+
+            <!-- 登录按钮 -->
+            <q-btn :loading="loading" class="logon-btn bg-logon-card-input" text-color="white" unelevated label="" style="font-size: large" @click="logon"
+              >登 录 系 统
+            </q-btn>
+            <div class="row justify-between" style="margin-bottom: 20px">
+              <q-btn flat label="忘记密码" />
+              <q-btn outline label="我要注册" />
             </div>
-          </q-card-actions>
-          <!-- <q-card-section>
-            <p class="text-caption text-weight-light text-grey">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce semper laoreet placerat. Nullam semper auctor justo, rutrum posuere odio vulputate
-              nec.
-            </p>
-          </q-card-section> -->
+            <p class="text-grey" align="left">账号2 ：test &nbsp;&nbsp;&nbsp;&nbsp;密码均为空</p>
+          </q-card-section>
         </q-card>
       </div>
     </div>
-  </q-page>
+
+    <!-- electron 登录 -->
+    <div class="row electron-only q-electron-drag" style="width: 100vw; min-width: 300px; background: rgba(255, 255, 255, 0)">
+      <div class="col flex justify-center items-center" v-show="$q.screen.gt.sm">
+        <q-skeleton type="text" height="100%" width="50%" v-if="!isLottieF" />
+        <lottie-web-cimo align="right" style="height: 70%" :path="defaultOptions.path" @isLottieFinish="handleFinish" />
+      </div>
+      <q-separator vertical inset v-if="$q.screen.gt.sm" />
+
+      <div class="col flex justify-center items-center">
+        <q-card square style="min-width: 290px; height: 100%; width: 60%" class="no-shadow">
+          <q-card-section align="center">
+            <h3 class="text-uppercase">cimo</h3>
+            <!-- 用户名 -->
+            <q-input class="logon-input q-electron-drag--exception" clearable standout="bg-cyan text-white" bottom-slots v-model="username" label="账号">
+              <template v-slot:prepend>
+                <q-icon name="account_circle" />
+              </template>
+            </q-input>
+            <!-- 密码 -->
+            <q-input
+              class="logon-input q-electron-drag--exception"
+              standout="bg-cyan text-white"
+              bottom-slots
+              v-model="password"
+              label="密码"
+              :type="isPwd ? 'password' : 'text'"
+              hint=""
+            >
+              <template v-slot:prepend>
+                <q-icon name="vpn_key" />
+              </template>
+              <template v-slot:append>
+                <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd" />
+              </template>
+            </q-input>
+
+            <!-- 登录按钮 -->
+            <q-btn :loading="loading" class="logon-btn bg-logon-card-input" text-color="white" unelevated label="" style="font-size: large" @click="logon"
+              >登 录 系 统
+            </q-btn>
+            <div class="row justify-between" style="margin-bottom: 20px">
+              <q-btn flat label="忘记密码" />
+              <q-btn outline label="我要注册" />
+            </div>
+            <p class="text-grey" align="left">账号2 ：test &nbsp;&nbsp;&nbsp;&nbsp;密码均为空</p>
+          </q-card-section>
+        </q-card>
+      </div>
+    </div>
+    <!-- electron end -->
+  </div>
 </template>
 
 <script>
+import LottieWebCimo from '../components/LottieWebCimo/LottieWebCimo.vue';
+
 export default {
-  name: 'Login',
+  name: 'logon',
+  components: { LottieWebCimo },
   data() {
     return {
-      email: '',
-      username: '',
+      isPwd: true,
+      username: 'admin',
       password: '',
+      defaultOptions: {
+        path: 'https://assets9.lottiefiles.com/packages/lf20_vo0a1yca.json',
+        loop: true,
+      },
+      loading: false,
+      percentage: 0,
+      isLottieF: false,
     };
+  },
+  methods: {
+    logon() {
+      this.loading = !this.loading;
+      if (this.username === 'admin' || this.username === 'test') {
+        sessionStorage.setItem('access_token', 972784674);
+        sessionStorage.setItem('user_role', this.username);
+        const lt = setTimeout(() => {
+          this.$router.push('/').then((e) => {
+            this.$q.notify({
+              icon: 'insert_emoticon',
+              message: 'hi，cimo 欢迎回来',
+              color: 'green',
+              position: 'top',
+              timeout: 1500,
+            });
+            clearTimeout(lt);
+            this.loading = !this.loading;
+            // 如果是 electron 则改变窗口大小
+            if (process.env.MODE === 'electron') {
+              this.$q.electron.remote.getCurrentWindow().setSize(1023, 768);
+              this.$q.electron.remote.getCurrentWindow().center();
+            }
+          });
+        }, Math.random() * 3000);
+      } else {
+        this.loading = !this.loading;
+        this.$q.notify({
+          icon: 'announcement',
+          message: '账号错误',
+          color: 'red',
+          position: 'top',
+          timeout: 1500,
+        });
+      }
+    },
+    handleFinish(e) {
+      this.isLottieF = e;
+    },
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+.logon-btn {
+  font-size: large;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.bg-logon-card-input {
+  background: linear-gradient(to right, #36d1dc 1%, #5b86e5 99%);
+  transition: all 0.3s ease-in-out;
+  background-size: 200% auto;
+}
+
+.bg-logon-card-input:hover {
+  background-position: right center;
+  box-shadow: 0 12px 20px -11px #5b86e5;
+}
+</style>
