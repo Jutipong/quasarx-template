@@ -9,7 +9,7 @@
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
 const { configure } = require('quasar/wrappers');
-const envparser = require('./envparser.js');
+// const envparser = require('./envparser.js');
 module.exports = configure(function (/* ctx */) {
   return {
     eslint: {
@@ -62,7 +62,7 @@ module.exports = configure(function (/* ctx */) {
 
       // publicPath: '/',
       // analyze: true,
-      env: envparser(),
+      // env: envparser(),
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,
