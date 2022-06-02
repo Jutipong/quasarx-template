@@ -9,62 +9,20 @@
       <div class="col flex justify-center items-center">
         <q-card square style="min-width: 290px; height: 100%; width: 60%" class="no-shadow">
           <q-card-section align="center">
-            <h3 class="text-uppercase">cimo</h3>
-            <!-- 用户名 -->
-            <q-input class="logon-input" clearable standout="bg-cyan text-white" bottom-slots v-model="username" label="账号">
+            <h3 class="text-uppercase">Login</h3>
+            <!-- User -->
+            <q-input class="logon-input" clearable standout="bg-cyan text-white" bottom-slots v-model="username" label="User">
               <template v-slot:prepend>
                 <q-icon name="account_circle" />
               </template>
             </q-input>
-            <!-- 密码 -->
-            <q-input class="logon-input" standout="bg-cyan text-white" bottom-slots v-model="password" label="密码" :type="isPwd ? 'password' : 'text'" hint="">
-              <template v-slot:prepend>
-                <q-icon name="vpn_key" />
-              </template>
-              <template v-slot:append>
-                <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd" />
-              </template>
-            </q-input>
-
-            <!-- 登录按钮 -->
-            <q-btn :loading="loading" class="logon-btn bg-logon-card-input" text-color="white" unelevated label="" style="font-size: large" @click="logon"
-              >登 录 系 统
-            </q-btn>
-            <div class="row justify-between" style="margin-bottom: 20px">
-              <q-btn flat label="忘记密码" />
-              <q-btn outline label="我要注册" />
-            </div>
-            <p class="text-grey" align="left">账号2 ：test &nbsp;&nbsp;&nbsp;&nbsp;密码均为空</p>
-          </q-card-section>
-        </q-card>
-      </div>
-    </div>
-
-    <!-- electron 登录 -->
-    <div class="row electron-only q-electron-drag" style="width: 100vw; min-width: 300px; background: rgba(255, 255, 255, 0)">
-      <div class="col flex justify-center items-center" v-show="$q.screen.gt.sm">
-        <q-skeleton type="text" height="100%" width="50%" v-if="!isLottieF" />
-        <lottie-web-cimo align="right" style="height: 70%" :path="defaultOptions.path" @isLottieFinish="handleFinish" />
-      </div>
-      <q-separator vertical inset v-if="$q.screen.gt.sm" />
-
-      <div class="col flex justify-center items-center">
-        <q-card square style="min-width: 290px; height: 100%; width: 60%" class="no-shadow">
-          <q-card-section align="center">
-            <h3 class="text-uppercase">cimo</h3>
-            <!-- 用户名 -->
-            <q-input class="logon-input q-electron-drag--exception" clearable standout="bg-cyan text-white" bottom-slots v-model="username" label="账号">
-              <template v-slot:prepend>
-                <q-icon name="account_circle" />
-              </template>
-            </q-input>
-            <!-- 密码 -->
+            <!-- Password -->
             <q-input
-              class="logon-input q-electron-drag--exception"
+              class="logon-input"
               standout="bg-cyan text-white"
               bottom-slots
               v-model="password"
-              label="密码"
+              label="Password"
               :type="isPwd ? 'password' : 'text'"
               hint=""
             >
@@ -76,20 +34,30 @@
               </template>
             </q-input>
 
-            <!-- 登录按钮 -->
-            <q-btn :loading="loading" class="logon-btn bg-logon-card-input" text-color="white" unelevated label="" style="font-size: large" @click="logon"
-              >登 录 系 统
+            <!-- button login -->
+            <q-btn
+              :loading="loading"
+              class="logon-btn bg-logon-card-input"
+              text-color="white"
+              unelevated
+              label=""
+              style="font-size: large"
+              @click="logon"
+              >Login
             </q-btn>
-            <div class="row justify-between" style="margin-bottom: 20px">
-              <q-btn flat label="忘记密码" />
-              <q-btn outline label="我要注册" />
-            </div>
-            <p class="text-grey" align="left">账号2 ：test &nbsp;&nbsp;&nbsp;&nbsp;密码均为空</p>
+            <!-- <div class="row justify-between" style="margin-bottom: 20px">
+              <q-btn flat label="register" />
+              <q-btn outline label="clear" />
+            </div> -->
+            <p class="text-grey q-mt-lg" align="center">
+              Developed with
+              <q-icon size="sm" name="las la-heartbeat" color="pink" class="q-mr-sm q-ml-sm"></q-icon>+
+              <q-icon size="sm" name="lab la-vuejs" color="green" class="q-mr-sm"></q-icon>
+            </p>
           </q-card-section>
         </q-card>
       </div>
     </div>
-    <!-- electron end -->
   </div>
 </template>
 
