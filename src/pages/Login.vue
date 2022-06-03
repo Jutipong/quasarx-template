@@ -15,23 +15,40 @@
           <q-card-section align="center">
             <h3 class="text-uppercase">Login</h3>
             <!-- User -->
-            <q-input clearable autofocus bottom-slots v-model="user.username" label="User">
+            <q-input clearable autofocus bottom-slots v-model="loginStore.User.UserName" label="User">
               <template v-slot:prepend>
                 <q-icon name="account_circle" />
               </template>
             </q-input>
             <!-- Password -->
-            <q-input bottom-slots v-model="user.password" label="Password" :type="isPwd ? 'password' : 'text'" hint="">
+            <q-input
+              bottom-slots
+              v-model="loginStore.User.Password"
+              label="Password"
+              :type="loginStore.Option.ShowPassword ? 'password' : 'text'"
+              hint=""
+            >
               <template v-slot:prepend>
                 <q-icon name="vpn_key" />
               </template>
               <template v-slot:append>
-                <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd" />
+                <q-icon
+                  :name="loginStore.Option.ShowPasswordwd ? 'visibility_off' : 'visibility'"
+                  class="cursor-pointer"
+                  @click="loginStore.Option.ShowPassword = !loginStore.Option.ShowPassword"
+                />
               </template>
             </q-input>
 
             <!-- button login -->
-            <q-btn :loading="loading" class="logon-btn bg-logon-card-input" text-color="white" label="Login" style="font-size: large" @click="login">
+            <q-btn
+              :loading="loginStore.Option.Loading"
+              class="logon-btn bg-logon-card-input"
+              text-color="white"
+              label="Login"
+              style="font-size: large"
+              @click="login"
+            >
             </q-btn>
             <!-- <div class="row justify-between" style="margin-bottom: 20px">
               <q-btn flat label="register" />
@@ -50,37 +67,26 @@
 </template>
 
 <script setup>
+//import
 import { useRouter } from 'vue-router';
 import { useQuasar } from 'quasar';
-
+import { useLoginStore } from '../stores/Login/index';
+//user
 const $q = useQuasar();
 const $router = useRouter();
-
-let user = $ref({
-  username: 'admin',
-  password: '',
-});
-let loading = $ref(false);
-let isPwd = $ref(true);
+const loginStore = useLoginStore();
 
 const login = () => {
-  loading = !loading;
-  if (user.username === 'admin' || user.username === 'test') {
+  loginStore.Option.Loading = !loginStore.Option.Loading;
+  if (loginStore.User.UserName === 'admin' || loginStore.User.UserName === 'test') {
     const lt = setTimeout(() => {
       $router.push('/home').then(() => {
-        $q.notify({
-          icon: 'insert_emoticon',
-          message: 'Login Ok.',
-          color: 'green',
-          position: 'top',
-          timeout: 1500,
-        });
         clearTimeout(lt);
-        loading = !loading;
+        loginStore.Option.Loading = !loginStore.Option;
       });
     }, Math.random() * 3000);
   } else {
-    loading = !loading;
+    loginStore.Option.Loading = !loginStore.Option;
   }
 };
 </script>
