@@ -5,12 +5,12 @@ export const useMainLayoutStore = defineStore('mainLayout', {
   state: (): MainLayout => ({
     DrawerOpen: false,
     Menus: [
-      {
-        Icon: 'inbox',
-        Label: 'Inbox',
-        Separator: true,
-        To: '/',
-      },
+      // {
+      //   Icon: 'inbox',
+      //   Label: 'Inbox',
+      //   Separator: true,
+      //   To: '',
+      // },
       {
         Icon: 'send',
         Label: 'Home',
@@ -21,7 +21,7 @@ export const useMainLayoutStore = defineStore('mainLayout', {
         Icon: 'delete',
         Label: 'Login',
         Separator: false,
-        To: 'login',
+        To: '/',
       },
     ],
   }),
