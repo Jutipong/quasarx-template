@@ -4,7 +4,7 @@ import { Option, Login, User } from './type';
 export const useLoginStore = defineStore('login', {
   state: (): Login => ({
     User: <User>{
-      UserName: 'test',
+      UserName: 'admin',
       Password: '',
     },
     Option: <Option>{
@@ -13,10 +13,13 @@ export const useLoginStore = defineStore('login', {
     },
   }),
   getters: {
-    user: (User) => User,
-    option: (Option) => Option,
+    // user: (User) => User,
+    // option: (Option) => Option,
   },
   actions: {
+    toggleLoading() {
+      this.Option.Loading = !this.Option.Loading;
+    },
     // Add(menu: Menu) {
     //   this.Menus.push(menu);
     // },

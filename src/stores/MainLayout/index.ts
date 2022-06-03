@@ -25,15 +25,14 @@ export const useMainLayoutStore = defineStore('mainLayout', {
       },
     ],
   }),
-  getters: {
-    menus: (state) => state.Menus,
-  },
+  // getters: {
+  //   menus: (state) => state.Menus,
+  // },
   actions: {
     Add(menu: Menu) {
       this.Menus.push(menu);
     },
     ToggleDrawer() {
-      console.log('ToggleDrawerOpen: ', this.DrawerOpen);
       this.DrawerOpen = !this.DrawerOpen;
     },
   },
