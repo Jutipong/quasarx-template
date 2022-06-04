@@ -5,7 +5,7 @@
     <q-header elevated class="bg-primary text-white">
       <!-- toolbar - title -->
       <q-toolbar style="margin-top: -4px" class="q-electron-drag">
-        <!-- <q-btn flat dense round :icon="store.DrawerOpen === true ? 'menu_open' : 'menu'" @click="store.ToggleDrawer" /> -->
+        <q-btn flat dense round :icon="store.DrawerOpen === true ? 'menu_open' : 'menu'" @click="store.ToggleDrawer" />
         <!-- end toolbar - title -->
 
         <!-- <toolbar-title /> -->
@@ -16,7 +16,9 @@
 
         <q-space />
         <!-- <toolbar-item-right /> -->
-        <!-- <ToolbarItemRight /> -->
+        <ToolbarItemRight class="q-mr-sm" />
+
+        <q-btn align="around" :label="$q.screen.gt.sm ? 'Logout' : ''" flat icon="logout" @click="logout"></q-btn>
       </q-toolbar>
 
       <q-separator color="grey-3" />
@@ -44,9 +46,38 @@
   </q-layout>
 </template>
 
-<script setup lang="ts">
+<script setup>
+//components
+import ToolbarItemRight from '../components/MainLayout/ToolbarItemRight.vue';
+//Import
+import { useRouter } from 'vue-router';
+import { useQuasar } from 'quasar';
 import { useMainLayoutStore } from '../stores/MainLayout';
 const store = useMainLayoutStore();
+//Use
+const $q = useQuasar();
+const router = useRouter();
+
+const logout = () => {
+  $q.dialog({
+    html: true,
+    title: '<div class="text-red"> Confirm</div>',
+    message: 'Are you sure you want to log out?',
+    cancel: true,
+    persistent: true,
+    ok: {
+      flat: true,
+      label: 'YES',
+      color: 'negative',
+    },
+    cancel: {
+      flat: true,
+      label: 'NO',
+    },
+  }).onOk(() => {
+    router.push('/');
+  });
+};
 </script>
 
 <!-- <script lang="ts">

@@ -1,38 +1,28 @@
 @@ -0,0 +1,129 @@
 <template>
-  <div class="q-gutter-sm row items-center no-wrap q-electron-drag--exception">
+  <div class="q-gutter-sm row items-center no-wrap">
     <!-- <q-btn round dense flat :icon="this.$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'" v-if="$q.screen.gt.sm" @click="fullScreen"> -->
 
-    <q-btn
-      round
-      dense
-      flat
-      color="secondary"
-      @click="$q.fullscreen.toggle()"
-      :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'"
-      :label="$q.fullscreen.isActive ? 'Exit Fullscreen' : 'Go Fullscreen'"
-    />
-
-    <q-btn round flat>
+    <q-btn flat @click="$q.fullscreen.toggle()" :icon="iconFullscreen" :label="lableFullscreen" />
+    <q-separator vertical />
+    <!-- <q-btn round flat>
       <q-menu>
         <div class="row no-wrap q-pa-md">
           <div class="column items-center">
             <q-avatar size="72px">
-              <!-- <img :src="this.$PUBLIC_PATH + 'data/avatar.jpg'" /> -->
-              <!-- <img src="data/avatar.jpg" /> -->
             </q-avatar>
 
             <div class="text-subtitle1 q-mt-md q-mb-xs">Hi！ CIMO</div>
 
-            <q-btn color="primary" label="Logout" size="sm" v-close-popup @click="store.Logout" />
+            <q-btn color="primary" label="Logout" size="sm" v-close-popup @click="logout" />
           </div>
         </div>
       </q-menu>
       <q-avatar size="26px">
-        <!-- <img :src="this.$PUBLIC_PATH + 'data/avatar.jpg'" /> -->
       </q-avatar>
       <q-tooltip>账号</q-tooltip>
-    </q-btn>
+    </q-btn> -->
+
     <!-- <div class="electron-only">
       <q-btn dense flat icon="minimize" @click="minimize" />
       <q-btn dense flat :icon="isMaximize ? 'crop_square' : 'flip_to_front'" @click="maximize" />
@@ -41,90 +31,21 @@
   </div>
 </template>
 
-<script lang="ts">
-import { useMainLayoutStore } from '../../stores/MainLayout/index';
-//user
-//user
-const store = useMainLayoutStore();
+<script setup lang="ts">
+import { computed } from 'vue';
+import { useQuasar } from 'quasar';
+//User
+const $q = useQuasar();
+
+const iconFullscreen = computed(() => {
+  return $q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen';
+});
+
+const lableFullscreen = computed(() => {
+  if ($q.screen.gt.sm) {
+    return $q.fullscreen.isActive ? 'Exit Fullscreen' : 'Fullscreen';
+  } else {
+    return '';
+  }
+});
 </script>
-<!-- 
-<script lang="ts">
-export default {
-  name: 'ToolbarItemRight',
-  data() {
-    return {
-      search: '',
-      mobileData: false,
-      bluetooth: true,
-      isMaximize: true,
-    };
-  },
-  methods: {
-    fullScreen() {
-      // if (this.$q.fullscreen.isActive) {
-      //   // 退出全屏模式：
-      //   this.$q.fullscreen
-      //     .exit()
-      //     .then(() => {
-      //       // v1.5.0+
-      //       // success!
-      //     })
-      //     // eslint-disable-next-line handle-callback-err
-      //     .catch((err) => {
-      //       // v1.5.0+
-      //       // oh, no!!!
-      //     });
-      // } else {
-      //   // 请求全屏模式：
-      //   this.$q.fullscreen
-      //     .request()
-      //     .then(() => {
-      //       // v1.5.0+
-      //       // success!
-      //     })
-      //     // eslint-disable-next-line handle-callback-err
-      //     .catch((err) => {
-      //       // v1.5.0+
-      //       // oh, no!!!
-      //     });
-      // }
-    },
-
-    logout() {
-      // this.$store.commit('LOGOUT');
-      // this.$router.push('/');
-      // window.sessionStorage.clear();
-      // if (process.env.MODE === 'electron') {
-      //   this.$q.electron.remote.getCurrentWindow().setSize(500, 490);
-      //   this.$q.electron.remote.getCurrentWindow().center();
-      // }
-    },
-
-    // electron
-    minimize() {
-      // if (process.env.MODE === 'electron') {
-      //   this.$q.electron.remote.BrowserWindow.getFocusedWindow().minimize();
-      // }
-    },
-
-    maximize() {
-      // if (process.env.MODE === 'electron') {
-      //   const win = this.$q.electron.remote.BrowserWindow.getFocusedWindow();
-      //   if (win.isMaximized()) {
-      //     win.unmaximize();
-      //     this.isMaximize = !this.isMaximize;
-      //   } else {
-      //     win.maximize();
-      //     this.isMaximize = !this.isMaximize;
-      //   }
-      // }
-    },
-
-    closeApp() {
-      // if (process.env.MODE === 'electron') {
-      //   this.$q.electron.remote.BrowserWindow.getFocusedWindow().close();
-      // }
-    },
-  },
-};
-</script> -->
