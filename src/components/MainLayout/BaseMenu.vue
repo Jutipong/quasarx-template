@@ -8,7 +8,7 @@
         :bg-color="bgColor"
         :duration="300"
         :bg-color-level="1"/> -->
-        {{ menuList }}
+        <!-- <BaseMenuItem :my-router="store.menus" :init-level="0" :bg-color="bgColor" :duration="300" :bg-color-level="1" /> -->
       </q-list>
 
       <!-- 底部说明 -->
@@ -17,21 +17,9 @@
   </q-scroll-area>
 </template>
 
-<script>
-// import { thumbStyleOfMenu } from '../BaseContent/ThumbStyle'
-// import BaseMenuItem from './BaseMenuItem'
-// import BottomLink from './BottomLink'
+<script setup lang="ts">
+// import BaseMenuItem from './BaseMenuItem.vue';
 import { useMainLayoutStore } from '../../stores/MainLayout/index';
 const store = useMainLayoutStore();
-export default {
-  name: 'BaseMenu',
-  // components: { BaseMenuItem, BottomLink },
-  data() {
-    return {
-      menuList: store.menus,
-      bgColor: 'bg-white',
-      // thumbStyleOfMenu
-    };
-  },
-};
+let bgColor = $ref('bg-white');
 </script>
