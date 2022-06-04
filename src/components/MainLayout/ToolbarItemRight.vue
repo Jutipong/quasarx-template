@@ -36,16 +36,7 @@ import { computed } from 'vue';
 import { useQuasar } from 'quasar';
 //User
 const $q = useQuasar();
-
-const iconFullscreen = computed(() => {
-  return $q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen';
-});
-
-const lableFullscreen = computed(() => {
-  if ($q.screen.gt.sm) {
-    return $q.fullscreen.isActive ? 'Exit Fullscreen' : 'Fullscreen';
-  } else {
-    return '';
-  }
-});
+//fn
+const iconFullscreen = computed(() => ($q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'));
+const lableFullscreen = computed(() => ($q.screen.gt.sm ? ($q.fullscreen.isActive ? 'Exit Fullscreen' : 'Fullscreen') : ''));
 </script>
