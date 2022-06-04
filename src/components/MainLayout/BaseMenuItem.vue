@@ -1,33 +1,33 @@
 <template>
   <div>
-    <template v-for="(item, index) in myRouter" :key="index + item.path">
-      <template v-if="item.meta.isHidden !== true">
-        <q-item-label v-if="item.meta.itemLabel" header class="text-weight-bold text-uppercase" :key="item.meta.itemLabel">
-          {{ item.meta.itemLabel }}
-        </q-item-label>
+    <template v-for="(item, index) in menus" :key="'root_' + index">
+      <!-- <template v-if="item.meta.isHidden !== true"> -->
+      <!-- <q-item-label v-if="item.meta.itemLabel" header class="text-weight-bold text-uppercase" :key="item.meta.itemLabel">
+        {{ item.meta.itemLabel }}
+      </q-item-label> -->
+      {{ item }}
+      <q-item
+        v-if="item?.Children"
+        clickable
+        v-ripple
+        :key="'children_' + index"
+        :exact="item.Path === '/'"
+        :class="baseItemClass"
+        :inset-level="initLevel"
+        :style="isWeChart ? ' line-height: normal' : ''"
+        active-class="baseItemActive"
+        :to="handleLink(basePath, item.Path)"
+        @click="externalLink(basePath, item.Path)"
+      >
+        <q-item-section avatar>
+          <q-icon :name="item.Meta?.Icon" />
+        </q-item-section>
+        <q-item-section>
+          {{ item?.Meta?.Title }}
+        </q-item-section>
+      </q-item>
 
-        <!-- <q-item
-          v-if="!item.children"
-          clickable
-          v-ripple
-          :key="index"
-          :exact="item.path === '/'"
-          :class="baseItemClass"
-          :inset-level="initLevel"
-          :style="isWeChart ? ' line-height: normal' : ''"
-          active-class="baseItemActive"
-          :to="handleLink(basePath, item.path)"
-          @click="externalLink(basePath, item.path)"
-        >
-          <q-item-section avatar>
-            <q-icon :name="item.meta.icon" />
-          </q-item-section>
-          <q-item-section>
-            {{ item.meta.title }}
-          </q-item-section>
-        </q-item> -->
-
-        <!-- <q-expansion-item
+      <!-- <q-expansion-item
           v-else
           :duration="duration"
           :class="baseItemClassWithNoChildren(item.path)"
@@ -46,11 +46,63 @@
             :base-path="basePath === undefined ? item.path : basePath + '/' + item.path"
           />
         </q-expansion-item> -->
-      </template>
+      <!-- </template> -->
     </template>
   </div>
 </template>
 
+<script setup lang="ts">
+import { Menu } from 'src/stores/MainLayout/type';
+import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
+
+const { menus, initLevel, bgColor, duration, bgColorLevel, basePath } = defineProps<{
+  menus: Menu[];
+  basePath?: string;
+  initLevel: number;
+  bgColor: string;
+  duration?: number;
+  bgColorLevel: number;
+}>();
+
+const router = useRouter();
+
+const baseItemClass = ref<string>(`${bgColor}-${bgColorLevel} base-menu-item`);
+const baseItemClassWithNoChildren = computed(() => {
+  return (path: string) => {
+    let rootPath = router.currentRoute.value.matched[0].path;
+    let obj = menus.find((r) => r.Path === rootPath);
+    // if (obj) {
+    //   obj.isOpen = true;
+    // }
+    return router.currentRoute.value.fullPath.startsWith(path) ? 'baseRootItemActive base-menu-item' + baseItemClass : baseItemClass;
+  };
+});
+
+const isWeChart = computed(() => {
+  return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1;
+});
+function handleLink(basePath: string = '', itemPath: string) {
+  let link = basePath === undefined ? itemPath : basePath + '/' + itemPath;
+  if (link.indexOf('http') !== -1) {
+    return '#';
+  }
+  return link.replace('//', '/');
+}
+function externalLink(basePath: string = '', itemPath: string) {
+  const link = basePath === undefined ? itemPath : basePath + '/' + itemPath;
+  const i = link.indexOf('http');
+  if (i !== -1) {
+    const a = document.createElement('a');
+    a.setAttribute('href', link.slice(i));
+    a.setAttribute('target', '_blank');
+    a.click();
+    return false;
+  }
+}
+</script>
+
+<!-- 
 <script>
 export default {
   name: 'base-menu-item',
@@ -60,30 +112,18 @@ export default {
     };
   },
   computed: {
-    /**
-     * 处理子菜单被激活的样式，同时修改父菜单样式
-     */
     baseItemClassWithNoChildren() {
       return (path) => {
         return this.$route.fullPath.startsWith(path) ? 'baseRootItemActive base-menu-item' + this.baseItemClass : this.baseItemClass;
       };
     },
 
-    /**
-     * 如果是微信浏览器，则添加 line-height: normal 样式
-     * @returns {boolean}
-     */
     isWeChart() {
       return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1;
     },
   },
   props: ['myRouter', 'initLevel', 'bgColor', 'bgColorLevel', 'duration', 'basePath'],
   methods: {
-    /**
-     * 处理内部链接
-     * @param basePath
-     * @param itemPath
-     */
     handleLink(basePath, itemPath) {
       const link = basePath === undefined ? itemPath : basePath + '/' + itemPath;
       if (link.indexOf('http') !== -1) {
@@ -92,12 +132,6 @@ export default {
       return link;
     },
 
-    /**
-     * 处理外部链接
-     * @param basePath
-     * @param itemPath
-     * @returns {boolean}
-     */
     externalLink(basePath, itemPath) {
       const link = basePath === undefined ? itemPath : basePath + '/' + itemPath;
       const i = link.indexOf('http');
@@ -111,7 +145,7 @@ export default {
     },
   },
 };
-</script>
+</script> -->
 <!-- <style lang="sass">
 $ITEM_COLOR: #2c3e50
 

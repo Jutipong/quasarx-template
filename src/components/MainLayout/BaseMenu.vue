@@ -8,7 +8,7 @@
         :bg-color="bgColor"
         :duration="300"
         :bg-color-level="1"/> -->
-        <!-- <BaseMenuItem :my-router="store.menus" :init-level="0" :bg-color="bgColor" :duration="300" :bg-color-level="1" /> -->
+        <BaseMenuItem :menus="store.menus" :init-level="0" :bg-color="bgColor" :duration="300" :bg-color-level="1" />
       </q-list>
 
       <!-- 底部说明 -->
@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-// import BaseMenuItem from './BaseMenuItem.vue';
+import BaseMenuItem from './BaseMenuItem.vue';
 import { useMainLayoutStore } from '../../stores/MainLayout/index';
 const store = useMainLayoutStore();
 let bgColor = $ref('bg-white');
