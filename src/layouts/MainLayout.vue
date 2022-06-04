@@ -5,21 +5,24 @@
     <q-header elevated class="bg-primary text-white">
       <!-- toolbar - title -->
       <q-toolbar style="margin-top: -4px" class="q-electron-drag">
-        <q-btn flat dense round :icon="store.DrawerOpen === true ? 'menu_open' : 'menu'" @click="store.ToggleDrawer" />
+        <!-- <q-btn flat dense round :icon="store.DrawerOpen === true ? 'menu_open' : 'menu'" @click="store.ToggleDrawer" /> -->
         <!-- end toolbar - title -->
 
-        <toolbar-title />
-        <!-- 面包屑 -->
-        <breadcrumbs v-if="$q.screen.gt.sm" />
+        <!-- <toolbar-title /> -->
+
+        <!-- breadcrumbs -->
+        <!-- <breadcrumbs v-if="$q.screen.gt.sm" /> -->
+        <!-- breadcrumbs -->
+
         <q-space />
-        <!-- 右侧元素 -->
-        <toolbar-item-right />
+        <!-- <toolbar-item-right /> -->
+        <!-- <ToolbarItemRight /> -->
       </q-toolbar>
 
       <q-separator color="grey-3" />
 
       <!-- TAGVIEW -->
-      <tag-view />
+      <!-- <tag-view /> -->
     </q-header>
     <!-- HEADER END -->
 
@@ -41,18 +44,28 @@
   </q-layout>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
+import { useMainLayoutStore } from '../stores/MainLayout';
+const store = useMainLayoutStore();
+</script>
+
+<!-- <script lang="ts">
+//components
+import ToolbarItemRight from '../components/MainLayout/ToolbarItemRight.vue';
 import { defineComponent } from 'vue';
 import { useMainLayoutStore } from '../stores/MainLayout';
 export default defineComponent({
   name: 'MainLayout',
+  components: {
+    ToolbarItemRight,
+  },
   setup() {
     return {
       store: useMainLayoutStore(),
     };
   },
 });
-</script>
+</script> -->
 
 <!-- <template>
   <q-layout view="hHr Lpr lff">
