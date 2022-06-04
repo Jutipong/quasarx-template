@@ -29,7 +29,7 @@
     <!-- HEADER END -->
 
     <!-- slideBar START -->
-    <q-drawer class="shadow-1" v-model="store.DrawerOpen" show-if-above content-class="bg-white" :width="240" side="left"  bordered>
+    <q-drawer class="shadow-1" v-model="store.DrawerOpen" show-if-above content-class="bg-white" :width="240" side="left" bordered>
       <BaseMenu />
     </q-drawer>
     <!-- slideBar END -->
