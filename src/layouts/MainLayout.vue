@@ -29,9 +29,9 @@
     <!-- HEADER END -->
 
     <!-- slideBar START -->
-    <!-- <q-drawer v-model="store.DrawerOpen" show-if-above content-class="bg-white" :width="240">
-      <base-menu />
-    </q-drawer> -->
+    <q-drawer class="shadow-1" v-model="store.DrawerOpen" show-if-above content-class="bg-white" :width="240" side="left"  bordered>
+      <BaseMenu />
+    </q-drawer>
     <!-- slideBar END -->
 
     <!-- container START -->
@@ -49,6 +49,7 @@
 <script setup>
 //components
 import ToolbarItemRight from '../components/MainLayout/ToolbarItemRight.vue';
+import BaseMenu from '../components/MainLayout/BaseMenu.vue';
 //Import
 import { useRouter } from 'vue-router';
 import { useQuasar } from 'quasar';
