@@ -83,6 +83,11 @@ const login = () => {
 </script>
 
 <style scoped>
+.base-card-shadow {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px 0px;
+  border-radius: 4px;
+}
+
 .logon-btn {
   font-size: large;
   margin-top: 0px;
