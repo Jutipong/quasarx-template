@@ -32,18 +32,18 @@
       <Menus />
     </q-drawer>
 
-    <q-page-container>
+    <!-- <q-page-container>
       <router-view />
-    </q-page-container>
+    </q-page-container> -->
 
     <!-- container START -->
-    <!-- <q-page-container class="app-main full-height">
+    <q-page-container class="app-main full-height">
       <transition name="fade-transform" mode="out-in">
-        <keep-alive :max="Max_keepAlive" :include="keepAliveList">
-          <router-view :key="$route.fullPath" />
-        </keep-alive>
+        <!-- <keep-alive :max="Max_keepAlive" :include="keepAliveList"> -->
+        <router-view :key="$route.fullPath" />
+        <!-- </keep-alive> -->
       </transition>
-    </q-page-container> -->
+    </q-page-container>
     <!-- container END -->
   </q-layout>
 </template>
