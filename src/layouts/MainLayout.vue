@@ -29,7 +29,7 @@
 
     <!-- slideBar START -->
     <q-drawer class="shadow-1" v-model="store.DrawerOpen" show-if-above content-class="bg-white" :width="240" side="left" bordered>
-      <BaseMenu />
+      <Menus />
     </q-drawer>
 
     <q-page-container>
@@ -49,7 +49,7 @@
 </template>
 <script>
 import ToolbarItemRight from '../components/MainLayout/ToolbarItemRight.vue';
-import BaseMenu from '../components/MainLayout/BaseMenu.vue';
+import Menus from '../components/MainLayout/Menus.vue';
 import { useMainLayoutStore } from '../stores/MainLayout';
 import { useRouter } from 'vue-router';
 import { useQuasar } from 'quasar';
@@ -58,7 +58,7 @@ export default defineComponent({
   name: 'MainLayout',
   components: {
     ToolbarItemRight,
-    BaseMenu,
+    Menus,
   },
   setup() {
     const store = useMainLayoutStore();

@@ -9,11 +9,11 @@
 </template>
 
 <script>
-import MenuItem from './BaseMenuItem.vue';
+import MenuItem from './MenuItem.vue';
 import { useMainLayoutStore } from '../../stores/MainLayout/index';
 import { defineComponent } from 'vue';
 export default defineComponent({
-  name: 'MainLayout',
+  name: 'Menus',
   components: {
     MenuItem,
   },
@@ -68,7 +68,6 @@ export default defineComponent({
           },
         ],
       },
-
       // {
       //   path: '/menu-1',
       //   name: 'menu-1',

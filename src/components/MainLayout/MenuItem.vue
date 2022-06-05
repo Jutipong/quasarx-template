@@ -39,7 +39,7 @@
         :style="isWeChart ? ' line-height: normal' : ''"
       >
         <!-- menu item indent + 0.2 ; background color depth + 1 ; if the parent menu path exists, splicing the parent menu path -->
-        <base-menu-item
+        <MenuItem
           :my-router="item.children"
           :init-level="initLevel + 0.2"
           :bg-color-level="bgColorLevel + 1"
@@ -53,16 +53,16 @@
 
 <script>
 export default {
-  name: 'base-menu-item',
+  name: 'MenuItem',
   data() {
     return {
-      baseItemClass: this.bgColor + '-' + this.bgColorLevel + ' base-menu-item',
+      baseItemClass: this.bgColor + '-' + this.bgColorLevel + ' MenuItem',
     };
   },
   computed: {
     baseItemClassWithNoChildren() {
       return (path) => {
-        let reuslt = this.$route.fullPath.startsWith(path) ? 'baseRootItemActive base-menu-item' + this.baseItemClass : this.baseItemClass;
+        let reuslt = this.$route.fullPath.startsWith(path) ? 'baseRootItemActive MenuItem' + this.baseItemClass : this.baseItemClass;
         console.log(reuslt);
         return reuslt;
       };
@@ -103,7 +103,7 @@ $ITEM_COLOR: #2c3e50
 $ACTIVE_COLOR: #1976d2
 $ACTIVE_BACKGROUND: rgba(25, 118, 210, 0.0618)
 
-.base-menu-item
+.MenuItem
   color: $ITEM_COLOR !important
 
 .baseRootItemActive
