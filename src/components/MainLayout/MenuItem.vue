@@ -84,16 +84,11 @@ export default {
       }
       return link.replace(`//`, `/`);
     },
-    // externalLink(basePath, itemPath) {
-    //   const link = basePath === undefined ? itemPath : basePath + '/' + itemPath;
-    //   const i = link.indexOf('http');
-    //   if (i !== -1) {
-    //     const a = document.createElement('a');
-    //     a.setAttribute('href', link.slice(i));
-    //     a.setAttribute('target', '_blank');
-    //     a.click();
-    //     return false;
-    //   }
+  },
+  watch: {
+    // '$route.fullPath'(newVal, oldVal) {
+    //   console.log('newVal :>> ', newVal);
+    //   console.log('oldVal :>> ', oldVal);
     // },
   },
 };
