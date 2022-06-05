@@ -16,7 +16,7 @@
         :inset-level="initLevel"
         :style="isWeChart ? ' line-height: normal' : ''"
         active-class="baseItemActive"
-        :to="item.path"
+        :to="handleLink(basePath, item.path)"
       >
         <q-item-section avatar>
           <q-icon :name="item.meta.icon" />
@@ -63,7 +63,7 @@ export default {
     baseItemClassWithNoChildren() {
       return (path) => {
         let reuslt = this.$route.fullPath.startsWith(path) ? 'baseRootItemActive MenuItem' + this.baseItemClass : this.baseItemClass;
-        console.log(reuslt);
+        console.log('baseItemClassWithNoChildren:l', reuslt);
         return reuslt;
       };
     },
@@ -74,14 +74,14 @@ export default {
   },
   props: ['myRouter', 'initLevel', 'bgColor', 'bgColorLevel', 'duration', 'basePath'],
   methods: {
-    // handleLink(basePath, itemPath) {
-    //   debugger
-    //   const link = basePath === undefined ? itemPath : basePath + '/' + itemPath;
-    //   if (link.indexOf('http') !== -1) {
-    //     return '#';
-    //   }
-    //   return link;
-    // },
+    handleLink(basePath, itemPath) {
+      const link = basePath === undefined ? itemPath : basePath + '/' + itemPath;
+      if (link.indexOf('http') !== -1) {
+        return '#';
+      }
+      console.log('link: ', link.replace(`//`, `/`));
+      return link.replace(`//`, `/`);
+    },
     // externalLink(basePath, itemPath) {
     //   const link = basePath === undefined ? itemPath : basePath + '/' + itemPath;
     //   const i = link.indexOf('http');
@@ -96,7 +96,7 @@ export default {
   },
 };
 </script>
-<style lang="sass">
+<style lang="sass" scoped>
 
 $ITEM_COLOR: #2c3e50
 

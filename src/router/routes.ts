@@ -18,8 +18,16 @@ const routes: RouteRecordRaw[] = [
     path: '/demo',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '/crud', component: () => import('pages/CRUD.vue') },
-      { path: '/uploadfile', component: () => import('pages/UploadFile.vue') },
+      { path: 'crud', component: () => import('pages/CRUD.vue') },
+      { path: 'uploadfile', component: () => import('pages/UploadFile.vue') },
+    ],
+  },
+  {
+    path: '/demo2',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: 'crud2', component: () => import('pages/CRUD.vue') },
+      { path: 'uploadfile2', component: () => import('pages/UploadFile.vue') },
     ],
   },
   {

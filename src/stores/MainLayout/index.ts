@@ -24,7 +24,7 @@ export const useMainLayoutStore = defineStore('mainLayout', {
         },
       },
       {
-        path: '/domo',
+        path: '/demo',
         label: 'Demo',
         meta: {
           title: 'Demo',
@@ -33,19 +33,48 @@ export const useMainLayoutStore = defineStore('mainLayout', {
         },
         children: [
           {
-            path: '/crud',
+            path: 'crud',
             label: 'CRUD',
             meta: {
-              title: 'dashboard',
+              title: 'CRUD',
               icon: 'save_as',
               active: false,
             },
           },
           {
-            path: '/uploadfile',
+            path: 'uploadfile',
             label: 'UploadFile',
             meta: {
-              title: 'Home',
+              title: 'UploadFile',
+              icon: 'upload_file',
+              active: false,
+            },
+          },
+        ],
+      },
+      {
+        path: '/demo2',
+        label: 'Demo2',
+        meta: {
+          title: 'Demo2',
+          icon: 'flutter_dash',
+          active: false,
+        },
+        children: [
+          {
+            path: 'crud2',
+            label: 'CRUD2',
+            meta: {
+              title: 'CRUD2',
+              icon: 'save_as',
+              active: false,
+            },
+          },
+          {
+            path: 'uploadfile2',
+            label: 'UploadFile2',
+            meta: {
+              title: 'UploadFile2',
               icon: 'upload_file',
               active: false,
             },
