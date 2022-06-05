@@ -5,7 +5,7 @@
         {{ item.meta.itemLabel }}
       </q-item-label>
 
-      <!-- 没有孩子 -->
+      <!-- no children -->
       <q-item
         v-if="!item.children"
         clickable
@@ -27,7 +27,7 @@
         </q-item-section>
       </q-item>
 
-      <!-- 有孩子 -->
+      <!-- has children -->
       <q-expansion-item
         v-else
         :duration="duration"
@@ -39,6 +39,7 @@
         :label="item.meta.title"
         :style="isWeChart ? ' line-height: normal' : ''"
       >
+        <!-- menu item indent + 0.2 ; background color depth + 1 ; if the parent menu path exists, splicing the parent menu path -->
         <base-menu-item
           :my-router="item.children"
           :init-level="initLevel + 0.2"
@@ -60,30 +61,18 @@ export default {
     };
   },
   computed: {
-    /**
-     * 处理子菜单被激活的样式，同时修改父菜单样式
-     */
     baseItemClassWithNoChildren() {
       return (path) => {
         return this.$route.fullPath.startsWith(path) ? 'baseRootItemActive base-menu-item' + this.baseItemClass : this.baseItemClass;
       };
     },
 
-    /**
-     * 如果是微信浏览器，则添加 line-height: normal 样式
-     * @returns {boolean}
-     */
     isWeChart() {
       return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1;
     },
   },
   props: ['myRouter', 'initLevel', 'bgColor', 'bgColorLevel', 'duration', 'basePath'],
   methods: {
-    /**
-     * 处理内部链接
-     * @param basePath
-     * @param itemPath
-     */
     handleLink(basePath, itemPath) {
       const link = basePath === undefined ? itemPath : basePath + '/' + itemPath;
       if (link.indexOf('http') !== -1) {
@@ -92,12 +81,6 @@ export default {
       return link;
     },
 
-    /**
-     * 处理外部链接
-     * @param basePath
-     * @param itemPath
-     * @returns {boolean}
-     */
     externalLink(basePath, itemPath) {
       const link = basePath === undefined ? itemPath : basePath + '/' + itemPath;
       const i = link.indexOf('http');

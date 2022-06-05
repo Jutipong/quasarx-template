@@ -3,8 +3,6 @@
     <div>
       <q-list>
         <MenuItem :myRouter="menus" :init-level="0" :bg-color="bgColor" :duration="300" :bg-color-level="1" />
-        <!--<MenuItem :myRouter="menus" :init-level="0" :bg-color="bgColor" :duration="300" :bg-color-level="1" /> -->
-        <!-- <BaseMenuItem :menus="menus" /> -->
       </q-list>
     </div>
   </q-scroll-area>
@@ -24,11 +22,10 @@ export default defineComponent({
     let bgColor = $ref('bg-white');
     let menus = $ref([
       {
-        path: '/',
-        name: 'home',
+        path: '/home',
         meta: {
           roles: [],
-          title: '主页',
+          title: 'Home',
           icon: 'home',
           keepAlive: true,
         },
@@ -36,7 +33,6 @@ export default defineComponent({
       },
       {
         path: '/start',
-        name: 'start',
         meta: {
           isOpen: false,
           roles: [],
@@ -48,7 +44,6 @@ export default defineComponent({
         children: [
           {
             path: 'getting-started',
-            name: 'gettingStarted',
             meta: {
               roles: [],
               title: '基础配置',
@@ -59,7 +54,6 @@ export default defineComponent({
           },
           {
             path: 'router-config',
-            name: 'routerConfig',
             meta: {
               roles: [],
               title: '路由配置',
@@ -70,7 +64,6 @@ export default defineComponent({
           },
           {
             path: 'my-menu',
-            name: 'myMenu',
             meta: {
               roles: [],
               title: '关于菜单',
@@ -81,7 +74,6 @@ export default defineComponent({
           },
           {
             path: 'async-router',
-            name: 'asyncRouter',
             meta: {
               roles: [],
               title: '动态路由',
@@ -92,7 +84,6 @@ export default defineComponent({
           },
           {
             path: 'async-router-impl',
-            name: 'asyncRouterImpl',
             meta: {
               roles: [],
               title: '动态路由实现思路',
@@ -115,7 +106,6 @@ export default defineComponent({
         children: [
           {
             path: 'menu-2',
-            name: 'menu-2',
             meta: {
               roles: [],
               title: '菜单 1-1',
@@ -126,7 +116,6 @@ export default defineComponent({
             children: [
               {
                 path: 'menu-3',
-                name: 'menu3',
                 meta: {
                   roles: [],
                   title: '菜单 1-2',
@@ -140,11 +129,10 @@ export default defineComponent({
         ],
       },
       {
-        path: 'http://www.quasarchs.com/vue-components/button',
-        name: 'external-link',
+        path: '/dashboard',
         meta: {
           roles: [],
-          title: '外部链接/更多组件',
+          title: 'Dashboard',
           icon: 'send',
         },
       },
