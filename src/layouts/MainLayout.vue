@@ -27,8 +27,9 @@
     </q-header>
     <!-- HEADER END -->
 
-    <q-drawer v-model="store.DrawerOpen" show-if-above bordered class="bg-grey-2" :width="240">
-      <BaseMenu />
+    <!-- slideBar START -->
+    <q-drawer class="shadow-1" v-model="store.DrawerOpen" show-if-above content-class="bg-white" :width="240" side="left" bordered>
+      <!-- <BaseMenu /> -->
     </q-drawer>
 
     <q-page-container>
@@ -46,28 +47,23 @@
     <!-- container END -->
   </q-layout>
 </template>
-
 <script>
-import { ref } from 'vue';
 import ToolbarItemRight from '../components/MainLayout/ToolbarItemRight.vue';
-import BaseMenu from '../components/MainLayout/BaseMenu.vue';
-import { useMainLayoutStore } from '../stores/MainLayout/index';
+// import BaseMenu from '../components/MainLayout/BaseMenu.vue';
+import { useMainLayoutStore } from '../stores/MainLayout';
 import { useRouter } from 'vue-router';
 import { useQuasar } from 'quasar';
-export default {
-  name: 'MyLayout',
-  components: { BaseMenu, ToolbarItemRight },
+import { defineComponent } from 'vue';
+export default defineComponent({
+  name: 'MainLayout',
+  components: {
+    ToolbarItemRight,
+  },
   setup() {
+    const store = useMainLayoutStore();
     //Use
     const $q = useQuasar();
     const router = useRouter();
-    const store = useMainLayoutStore();
-    const search = ref('');
-
-    // function toggleLeftDrawer() {
-    //   leftDrawerOpen.value = !leftDrawerOpen.value;
-    // }
-
     const logout = () => {
       $q.dialog({
         html: true,
@@ -90,35 +86,9 @@ export default {
     };
 
     return {
+      store: useRouter(),
       logout,
-      search,
-      store,
     };
   },
-};
+});
 </script>
-
-<style lang="sass">
-.YL
-
-  &__toolbar-input-container
-    min-width: 100px
-    width: 55%
-
-  &__toolbar-input-btn
-    border-radius: 0
-    border-style: solid
-    border-width: 1px 1px 1px 0
-    border-color: rgba(0,0,0,.24)
-    max-width: 60px
-    width: 100%
-
-  // &__drawer-footer-link
-  //   color: inherit
-  //   text-decoration: none
-  //   font-weight: 500
-  //   font-size: .75rem
-
-    &:hover
-      color: #000
-</style>
