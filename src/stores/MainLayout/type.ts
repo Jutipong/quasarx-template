@@ -9,25 +9,24 @@ export interface MainLayout {
 //   To: string;
 //   Separator: boolean;
 // }
-
 export interface Menu {
-  Path: string;
-  Name: string;
-  Meta?: Meta;
-  Component: string;
-  Children?: Child[];
+  path: string;
+  label: string;
+  meta: Meta;
+  children?: Menu[];
 }
 
 export interface Meta {
-  Title: string;
-  Icon: string;
-  IsActive: boolean;
+  title: string;
+  icon: string;
+  active: boolean;
 }
 
-export interface Child {
-  Path: string;
-  Name: string;
-  Meta?: Meta;
-  Component: string;
-  component: string;
-}
+// export interface Child {
+//   Path: string;
+//   Name: string;
+//   Meta: Meta;
+//   Component: string;
+//   component: string;
+//   children?: Child[];
+// }
