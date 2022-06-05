@@ -16,8 +16,7 @@
         :inset-level="initLevel"
         :style="isWeChart ? ' line-height: normal' : ''"
         active-class="baseItemActive"
-        :to="handleLink(basePath, item.path)"
-        @click="externalLink(basePath, item.path)"
+        :to="item.path"
       >
         <q-item-section avatar>
           <q-icon :name="item.meta.icon" />
@@ -63,7 +62,9 @@ export default {
   computed: {
     baseItemClassWithNoChildren() {
       return (path) => {
-        return this.$route.fullPath.startsWith(path) ? 'baseRootItemActive base-menu-item' + this.baseItemClass : this.baseItemClass;
+        let reuslt = this.$route.fullPath.startsWith(path) ? 'baseRootItemActive base-menu-item' + this.baseItemClass : this.baseItemClass;
+        console.log(reuslt);
+        return reuslt;
       };
     },
 
@@ -73,25 +74,25 @@ export default {
   },
   props: ['myRouter', 'initLevel', 'bgColor', 'bgColorLevel', 'duration', 'basePath'],
   methods: {
-    handleLink(basePath, itemPath) {
-      const link = basePath === undefined ? itemPath : basePath + '/' + itemPath;
-      if (link.indexOf('http') !== -1) {
-        return '#';
-      }
-      return link;
-    },
-
-    externalLink(basePath, itemPath) {
-      const link = basePath === undefined ? itemPath : basePath + '/' + itemPath;
-      const i = link.indexOf('http');
-      if (i !== -1) {
-        const a = document.createElement('a');
-        a.setAttribute('href', link.slice(i));
-        a.setAttribute('target', '_blank');
-        a.click();
-        return false;
-      }
-    },
+    // handleLink(basePath, itemPath) {
+    //   debugger
+    //   const link = basePath === undefined ? itemPath : basePath + '/' + itemPath;
+    //   if (link.indexOf('http') !== -1) {
+    //     return '#';
+    //   }
+    //   return link;
+    // },
+    // externalLink(basePath, itemPath) {
+    //   const link = basePath === undefined ? itemPath : basePath + '/' + itemPath;
+    //   const i = link.indexOf('http');
+    //   if (i !== -1) {
+    //     const a = document.createElement('a');
+    //     a.setAttribute('href', link.slice(i));
+    //     a.setAttribute('target', '_blank');
+    //     a.click();
+    //     return false;
+    //   }
+    // },
   },
 };
 </script>
