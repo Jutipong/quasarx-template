@@ -1,23 +1,54 @@
-<template>
+<!-- <template>
   <q-scroll-area :visible="false" class="fit" :thumb-style="{ right: '5px', borderRadius: '5px', backgroundColor: '#616161', width: '5px' }">
     <div>
-      <q-list>
-        <!-- <base-menu-item
+      <q-list> -->
+<!-- <base-menu-item
         :my-router="menuList"
         :init-level="0"
         :bg-color="bgColor"
         :duration="300"
         :bg-color-level="1"/> -->
-        <BaseMenuItem :menus="menus" :init-level="0" :bg-color="bgColor" :duration="300" :bg-color-level="1" />
-        <!-- <BaseMenuItem :menus="menus" /> -->
-      </q-list>
+<!-- <BaseMenuItem :menus="menus" :init-level="0" :bg-color="bgColor" :duration="300" :bg-color-level="1" /> -->
+<!-- <BaseMenuItem :menus="menus" /> -->
+<!-- </q-list> -->
 
-      <!-- 底部说明 -->
-      <!-- <bottom-link /> -->
-    </div>
+<!-- 底部说明 -->
+<!-- <bottom-link /> -->
+<!-- </div>
+  </q-scroll-area>
+</template> -->
+
+<template>
+  <q-scroll-area class="fit">
+    <q-list>
+      <q-item v-for="link in links1" :key="link.text" v-ripple clickable>
+        <q-item-section avatar>
+          <q-icon color="grey" :name="link.icon" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>{{ link.text }}</q-item-label>
+        </q-item-section>
+      </q-item>
+
+      <q-separator />
+      <!-- ###################################################### -->
+
+      <q-expansion-item :duration="500" icon="perm_identity" label="Account settings" caption="John Doe">
+        <q-item :inset-level="0.4" v-for="link in links2" :key="link.text" v-ripple clickable>
+          <q-item-section avatar>
+            <q-icon color="grey" :name="link.icon" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>{{ link.text }}</q-item-label>
+          </q-item-section>
+        </q-item>
+      </q-expansion-item>
+      <!-- ###################################################### -->
+      <q-separator />
+    </q-list>
   </q-scroll-area>
 </template>
-
+<!-- 
 <script setup lang="ts">
 import BaseMenuItem from './BaseMenuItem.vue';
 import { useMainLayoutStore } from '../../stores/MainLayout/index';
@@ -330,4 +361,61 @@ let menus = $ref([
     component: 'components/cimo.vue',
   },
 ]);
+
+let links1 = $ref([{ icon: 'home', text: 'Home' }]);
+let links2 = $ref([
+  { icon: 'folder', text: 'Library' },
+  { icon: 'restore', text: 'History' },
+  { icon: 'watch_later', text: 'Watch later' },
+  { icon: 'thumb_up_alt', text: 'Liked videos' },
+]);
+</script> -->
+
+<script>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { useQuasar } from 'quasar';
+import { useMainLayoutStore } from '../../stores/MainLayout/index';
+export default {
+  name: 'BaseMenu',
+  // components: { BaseMenu },
+  setup() {
+    //Use
+    const $q = useQuasar();
+    const router = useRouter();
+    const store = useMainLayoutStore();
+
+    const logout = () => {
+      $q.dialog({
+        html: true,
+        title: '<div class="text-red"> Confirm</div>',
+        message: 'Are you sure you want to log out?',
+        cancel: true,
+        persistent: true,
+        ok: {
+          flat: true,
+          label: 'YES',
+          color: 'negative',
+        },
+        cancel: {
+          flat: true,
+          label: 'NO',
+        },
+      }).onOk(() => {
+        router.push('/');
+      });
+    };
+
+    return {
+      store,
+      links1: [{ icon: 'home', text: 'Home' }],
+      links2: [
+        { icon: 'folder', text: 'Library' },
+        { icon: 'restore', text: 'History' },
+        { icon: 'watch_later', text: 'Watch later' },
+        { icon: 'thumb_up_alt', text: 'Liked videos' },
+      ],
+    };
+  },
+};
 </script>

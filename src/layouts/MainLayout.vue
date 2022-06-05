@@ -28,34 +28,7 @@
     <!-- HEADER END -->
 
     <q-drawer v-model="store.DrawerOpen" show-if-above bordered class="bg-grey-2" :width="240">
-      <q-scroll-area class="fit">
-        <q-list padding>
-          <q-item v-for="link in links1" :key="link.text" v-ripple clickable>
-            <q-item-section avatar>
-              <q-icon color="grey" :name="link.icon" />
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>{{ link.text }}</q-item-label>
-            </q-item-section>
-          </q-item>
-
-          <q-separator />
-          <!-- ###################################################### -->
-
-          <q-expansion-item :duration="500" icon="perm_identity" label="Account settings" caption="John Doe">
-            <q-item :inset-level="0.4" v-for="link in links2" :key="link.text" v-ripple clickable>
-              <q-item-section avatar>
-                <q-icon color="grey" :name="link.icon" />
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>{{ link.text }}</q-item-label>
-              </q-item-section>
-            </q-item>
-          </q-expansion-item>
-          <!-- ###################################################### -->
-          <q-separator />
-        </q-list>
-      </q-scroll-area>
+      <BaseMenu />
     </q-drawer>
 
     <q-page-container>
@@ -76,14 +49,14 @@
 
 <script>
 import { ref } from 'vue';
-import { fabYoutube } from '@quasar/extras/fontawesome-v6';
 import ToolbarItemRight from '../components/MainLayout/ToolbarItemRight.vue';
+import BaseMenu from '../components/MainLayout/BaseMenu.vue';
 import { useMainLayoutStore } from '../stores/MainLayout/index';
 import { useRouter } from 'vue-router';
 import { useQuasar } from 'quasar';
 export default {
   name: 'MyLayout',
-  components: { ToolbarItemRight },
+  components: { BaseMenu, ToolbarItemRight },
   setup() {
     //Use
     const $q = useQuasar();
@@ -117,18 +90,9 @@ export default {
     };
 
     return {
-      fabYoutube,
       logout,
       search,
       store,
-
-      links1: [{ icon: 'home', text: 'Home' }],
-      links2: [
-        { icon: 'folder', text: 'Library' },
-        { icon: 'restore', text: 'History' },
-        { icon: 'watch_later', text: 'Watch later' },
-        { icon: 'thumb_up_alt', text: 'Liked videos' },
-      ],
     };
   },
 };
