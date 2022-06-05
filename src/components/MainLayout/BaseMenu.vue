@@ -6,9 +6,6 @@
         <!--<MenuItem :myRouter="menus" :init-level="0" :bg-color="bgColor" :duration="300" :bg-color-level="1" /> -->
         <!-- <BaseMenuItem :menus="menus" /> -->
       </q-list>
-
-      <!-- 底部说明 -->
-      <!-- <bottom-link /> -->
     </div>
   </q-scroll-area>
 </template>
