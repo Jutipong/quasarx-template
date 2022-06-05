@@ -1,9 +1,9 @@
 <template>
   <div>
     <template v-for="(item, index) in myRouter">
-      <q-item-label v-if="item.meta.itemLabel" header class="text-weight-bold text-uppercase" :key="item.meta.itemLabel">
+      <!-- <q-item-label v-if="item.meta.itemLabel" header class="text-weight-bold text-uppercase" :key="item.meta.itemLabel">
         {{ item.meta.itemLabel }}
-      </q-item-label>
+      </q-item-label> -->
 
       <!-- no children -->
       <q-item
@@ -22,7 +22,7 @@
           <q-icon :name="item.meta.icon" />
         </q-item-section>
         <q-item-section>
-          {{ item.meta.title }}
+          {{ item.label }}
         </q-item-section>
       </q-item>
 
@@ -35,7 +35,7 @@
         :header-inset-level="initLevel"
         :key="initLevel + index"
         :icon="item.meta.icon"
-        :label="item.meta.title"
+        :label="item.label"
         :style="isWeChart ? ' line-height: normal' : ''"
       >
         <!-- menu item indent + 0.2 ; background color depth + 1 ; if the parent menu path exists, splicing the parent menu path -->

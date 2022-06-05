@@ -37,12 +37,13 @@
     </q-page-container> -->
 
     <!-- container START -->
+
     <q-page-container class="app-main full-height">
-      <transition name="fade-transform" mode="out-in">
-        <!-- <keep-alive :max="Max_keepAlive" :include="keepAliveList"> -->
-        <router-view :key="$route.fullPath" />
-        <!-- </keep-alive> -->
-      </transition>
+      <!-- <transition name="fade-transform" mode="out-in"> -->
+      <!-- <keep-alive :max="10" :include="keepAliveList"> -->
+      <router-view :key="$route.fullPath" />
+      <!-- </keep-alive> -->
+      <!-- </transition> -->
     </q-page-container>
     <!-- container END -->
   </q-layout>

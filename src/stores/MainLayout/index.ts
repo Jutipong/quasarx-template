@@ -24,29 +24,29 @@ export const useMainLayoutStore = defineStore('mainLayout', {
         },
       },
       {
-        path: '',
+        path: '/domo',
         label: 'Demo',
         meta: {
           title: 'Demo',
-          icon: 'design_services',
+          icon: 'flutter_dash',
           active: false,
         },
         children: [
           {
-            path: '/dashboard',
+            path: '/crud',
             label: 'CRUD',
             meta: {
               title: 'dashboard',
-              icon: 'tune',
+              icon: 'save_as',
               active: false,
             },
           },
           {
-            path: '/home',
+            path: '/uploadfile',
             label: 'UploadFile',
             meta: {
               title: 'Home',
-              icon: 'tune',
+              icon: 'upload_file',
               active: false,
             },
           },
