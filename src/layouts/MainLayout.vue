@@ -1,6 +1,5 @@
 <template>
-  <!-- <q-layout :view="viewStyle" class="full-height"> -->
-  <q-layout class="full-height" view="hHh lpR fFf">
+  <q-layout view="hHh lpR fFf" class="bg-grey-1">
     <!-- HEADER START -->
     <q-header elevated class="bg-primary text-white">
       <!-- toolbar - title -->
@@ -28,11 +27,40 @@
     </q-header>
     <!-- HEADER END -->
 
-    <!-- slideBar START -->
-    <q-drawer class="shadow-1" v-model="store.DrawerOpen" show-if-above content-class="bg-white" :width="240" side="left" bordered>
-      <BaseMenu />
+    <q-drawer v-model="store.DrawerOpen" show-if-above bordered class="bg-grey-2" :width="240">
+      <q-scroll-area class="fit">
+        <q-list padding>
+          <q-item v-for="link in links1" :key="link.text" v-ripple clickable>
+            <q-item-section avatar>
+              <q-icon color="grey" :name="link.icon" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>{{ link.text }}</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-separator />
+          <!-- ###################################################### -->
+
+          <q-expansion-item :duration="500" icon="perm_identity" label="Account settings" caption="John Doe">
+            <q-item :inset-level="0.4" v-for="link in links2" :key="link.text" v-ripple clickable>
+              <q-item-section avatar>
+                <q-icon color="grey" :name="link.icon" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>{{ link.text }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-expansion-item>
+          <!-- ###################################################### -->
+          <q-separator />
+        </q-list>
+      </q-scroll-area>
     </q-drawer>
-    <!-- slideBar END -->
+
+    <q-page-container>
+      <router-view />
+    </q-page-container>
 
     <!-- container START -->
     <!-- <q-page-container class="app-main full-height">
@@ -46,107 +74,87 @@
   </q-layout>
 </template>
 
-<script setup>
-//components
+<script>
+import { ref } from 'vue';
+import { fabYoutube } from '@quasar/extras/fontawesome-v6';
 import ToolbarItemRight from '../components/MainLayout/ToolbarItemRight.vue';
-import BaseMenu from '../components/MainLayout/BaseMenu.vue';
-//Import
+import { useMainLayoutStore } from '../stores/MainLayout/index';
 import { useRouter } from 'vue-router';
 import { useQuasar } from 'quasar';
-import { useMainLayoutStore } from '../stores/MainLayout';
-const store = useMainLayoutStore();
-//Use
-const $q = useQuasar();
-const router = useRouter();
+export default {
+  name: 'MyLayout',
+  components: { ToolbarItemRight },
+  setup() {
+    //Use
+    const $q = useQuasar();
+    const router = useRouter();
+    const store = useMainLayoutStore();
+    const search = ref('');
 
-const logout = () => {
-  $q.dialog({
-    html: true,
-    title: '<div class="text-red"> Confirm</div>',
-    message: 'Are you sure you want to log out?',
-    cancel: true,
-    persistent: true,
-    ok: {
-      flat: true,
-      label: 'YES',
-      color: 'negative',
-    },
-    cancel: {
-      flat: true,
-      label: 'NO',
-    },
-  }).onOk(() => {
-    router.push('/');
-  });
+    // function toggleLeftDrawer() {
+    //   leftDrawerOpen.value = !leftDrawerOpen.value;
+    // }
+
+    const logout = () => {
+      $q.dialog({
+        html: true,
+        title: '<div class="text-red"> Confirm</div>',
+        message: 'Are you sure you want to log out?',
+        cancel: true,
+        persistent: true,
+        ok: {
+          flat: true,
+          label: 'YES',
+          color: 'negative',
+        },
+        cancel: {
+          flat: true,
+          label: 'NO',
+        },
+      }).onOk(() => {
+        router.push('/');
+      });
+    };
+
+    return {
+      fabYoutube,
+      logout,
+      search,
+      store,
+
+      links1: [{ icon: 'home', text: 'Home' }],
+      links2: [
+        { icon: 'folder', text: 'Library' },
+        { icon: 'restore', text: 'History' },
+        { icon: 'watch_later', text: 'Watch later' },
+        { icon: 'thumb_up_alt', text: 'Liked videos' },
+      ],
+    };
+  },
 };
 </script>
 
-<!-- <script lang="ts">
-//components
-import ToolbarItemRight from '../components/MainLayout/ToolbarItemRight.vue';
-import { defineComponent } from 'vue';
-import { useMainLayoutStore } from '../stores/MainLayout';
-export default defineComponent({
-  name: 'MainLayout',
-  components: {
-    ToolbarItemRight,
-  },
-  setup() {
-    return {
-      store: useMainLayoutStore(),
-    };
-  },
-});
-</script> -->
+<style lang="sass">
+.YL
 
-<!-- <template>
-  <q-layout view="hHr Lpr lff">
-    <q-header elevated class="bg-primary text-white">
-      <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="() => store.ToggleDrawer()" />
+  &__toolbar-input-container
+    min-width: 100px
+    width: 55%
 
-        <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" />
-          </q-avatar>
-          Title
-        </q-toolbar-title>
-      </q-toolbar>
-    </q-header>
+  &__toolbar-input-btn
+    border-radius: 0
+    border-style: solid
+    border-width: 1px 1px 1px 0
+    border-color: rgba(0,0,0,.24)
+    max-width: 60px
+    width: 100%
 
-    <q-drawer show-if-above v-model="store.DrawerOpen" side="left" elevated :width="240" bordered>
-      <q-scroll-area class="fit">
-        <q-list>
-          <template v-for="(menuItem, index) in store.Menus" :key="index">
-            <q-item clickable :active="menuItem.Label === 'Outbox'" v-ripple :to="menuItem.To">
-              <q-item-section avatar>
-                <q-icon :name="menuItem.Icon" />
-              </q-item-section>
-              <q-item-section>
-                {{ menuItem.Label }}
-              </q-item-section>
-            </q-item>
-            <q-separator :key="'sep' + index" v-if="menuItem.Separator" />
-          </template>
-        </q-list>
-      </q-scroll-area>
-    </q-drawer>
+  // &__drawer-footer-link
+  //   color: inherit
+  //   text-decoration: none
+  //   font-weight: 500
+  //   font-size: .75rem
 
-    <q-page-container>
-      <router-view />
-    </q-page-container>
-  </q-layout>
-</template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-import { useMainLayoutStore } from '../stores/MainLayout';
-export default defineComponent({
-  name: 'MainLayout',
-  setup() {
-    return {
-      store: useMainLayoutStore(),
-    };
-  },
-});
-</script> -->
+    &:hover
+      color: #000
+</style>
