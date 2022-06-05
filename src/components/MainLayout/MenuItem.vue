@@ -62,9 +62,12 @@ export default {
   computed: {
     baseItemClassWithNoChildren() {
       return (path) => {
-        let reuslt = this.$route.fullPath.startsWith(path) ? 'baseRootItemActive MenuItem' + this.baseItemClass : this.baseItemClass;
-        console.log('baseItemClassWithNoChildren:l', reuslt);
-        return reuslt;
+        const p = this.$route.fullPath.split(`/`);
+        if (p && p.length == 3) {
+          return `/${p[1]}` === path ? 'baseRootItemActive MenuItem' + this.baseItemClass : this.baseItemClass;
+        } else {
+          return this.$route.fullPath.startsWith(path) ? 'baseRootItemActive MenuItem' + this.baseItemClass : this.baseItemClass;
+        }
       };
     },
 
@@ -79,7 +82,6 @@ export default {
       if (link.indexOf('http') !== -1) {
         return '#';
       }
-      console.log('link: ', link.replace(`//`, `/`));
       return link.replace(`//`, `/`);
     },
     // externalLink(basePath, itemPath) {
