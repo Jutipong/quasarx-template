@@ -86,7 +86,7 @@ export default defineComponent({
     };
 
     return {
-      store: useRouter(),
+      store,
       logout,
     };
   },
