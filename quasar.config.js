@@ -38,6 +38,7 @@ module.exports = configure(function (/* ctx */) {
       // 'mdi-v5',
       // 'fontawesome-v6',
       'eva-icons',
+      'line-awesome',
       // 'themify',
       // 'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
@@ -100,7 +101,7 @@ module.exports = configure(function (/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: [],
+      plugins: ['Dialog', 'Notify', 'AppFullscreen'],
     },
 
     // animations: 'all', // --- includes all animations

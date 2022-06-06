@@ -10,13 +10,26 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      // { path: '', component: () => import('pages/IndexPage.vue') },
       { path: 'home', component: () => import('pages/Home.vue') },
-      // { path: 'login', component: () => import('pages/Login.vue') },
+      { path: 'dashboard', component: () => import('pages/Dashboard.vue') },
     ],
   },
-  // Always leave this as last one,
-  // but you can also remove it
+  {
+    path: '/demo',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: 'crud', component: () => import('pages/CRUD.vue') },
+      { path: 'uploadfile', component: () => import('pages/UploadFile.vue') },
+    ],
+  },
+  {
+    path: '/demo2',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: 'crud2', component: () => import('pages/CRUD.vue') },
+      { path: 'uploadfile2', component: () => import('pages/UploadFile.vue') },
+    ],
+  },
   {
     path: '/:catchAll(.*)*',
     component: () => import('pages/ErrorNotFound.vue'),

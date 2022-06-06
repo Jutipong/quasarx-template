@@ -5,5 +5,5 @@
 </template>
 
 <script setup>
-let Msg = $ref('Homett');
+let Msg = $ref('CRUD 2');
 </script>

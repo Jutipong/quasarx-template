@@ -1,50 +1,94 @@
 <template>
-  <q-layout view="hHr Lpr lff">
+  <q-layout view="hHh lpR fFf" class="bg-grey-1">
+    <!-- HEADER START -->
     <q-header elevated class="bg-primary text-white">
-      <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="() => store.ToggleDrawer()" />
+      <!-- toolbar - title -->
+      <q-toolbar style="margin-top: -4px" class="q-electron-drag">
+        <q-btn flat dense round :icon="store.DrawerOpen === true ? 'menu_open' : 'menu'" @click="store.ToggleDrawer" />
+        <!-- end toolbar - title -->
 
-        <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" />
-          </q-avatar>
-          Title
-        </q-toolbar-title>
+        <!-- <toolbar-title /> -->
+
+        <!-- breadcrumbs -->
+        <!-- <breadcrumbs v-if="$q.screen.gt.sm" /> -->
+        <!-- breadcrumbs -->
+
+        <q-space />
+        <!-- <toolbar-item-right /> -->
+        <ToolbarItemRight class="q-mr-sm" />
+
+        <q-btn align="around" :label="$q.screen.gt.sm ? 'Logout' : ''" flat icon="logout" @click="logout"></q-btn>
       </q-toolbar>
-    </q-header>
 
-    <q-drawer show-if-above v-model="store.DrawerOpen" side="left" elevated :width="240" bordered>
-      <q-scroll-area class="fit">
-        <q-list>
-          <template v-for="(menuItem, index) in store.Menus" :key="index">
-            <q-item clickable :active="menuItem.Label === 'Outbox'" v-ripple :to="menuItem.To">
-              <q-item-section avatar>
-                <q-icon :name="menuItem.Icon" />
-              </q-item-section>
-              <q-item-section>
-                {{ menuItem.Label }}
-              </q-item-section>
-            </q-item>
-            <q-separator :key="'sep' + index" v-if="menuItem.Separator" />
-          </template>
-        </q-list>
-      </q-scroll-area>
+      <q-separator color="grey-3" />
+
+      <!-- TAGVIEW -->
+      <!-- <tag-view /> -->
+    </q-header>
+    <!-- HEADER END -->
+
+    <!-- slideBar START -->
+    <q-drawer class="shadow-1" v-model="store.DrawerOpen" show-if-above content-class="bg-white" :width="240" side="left" bordered>
+      <Menus />
     </q-drawer>
 
-    <q-page-container>
+    <!-- <q-page-container>
       <router-view />
+    </q-page-container> -->
+
+    <!-- container START -->
+
+    <q-page-container class="app-main full-height">
+      <!-- <transition name="fade-transform" mode="out-in"> -->
+      <!-- <keep-alive :max="10" :include="keepAliveList"> -->
+      <router-view :key="$route.fullPath" />
+      <!-- </keep-alive> -->
+      <!-- </transition> -->
     </q-page-container>
+    <!-- container END -->
   </q-layout>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script>
+import ToolbarItemRight from '../components/MainLayout/ToolbarItemRight.vue';
+import Menus from '../components/MainLayout/Menus.vue';
 import { useMainLayoutStore } from '../stores/MainLayout';
+import { useRouter } from 'vue-router';
+import { useQuasar } from 'quasar';
+import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'MainLayout',
+  components: {
+    ToolbarItemRight,
+    Menus,
+  },
   setup() {
+    const store = useMainLayoutStore();
+    const $q = useQuasar();
+    const router = useRouter();
+    const logout = () => {
+      $q.dialog({
+        html: true,
+        title: '<div class="text-red"> Confirm</div>',
+        message: 'Are you sure you want to log out?',
+        cancel: true,
+        persistent: true,
+        ok: {
+          flat: true,
+          label: 'YES',
+          color: 'negative',
+        },
+        cancel: {
+          flat: true,
+          label: 'NO',
+        },
+      }).onOk(() => {
+        router.push('/');
+      });
+    };
+
     return {
-      store: useMainLayoutStore(),
+      store,
+      logout,
     };
   },
 });

@@ -1,58 +1,109 @@
 <template>
-  <q-page class="window-height window-width row justify-center items-center" style="background: linear-gradient(135deg, #ea5c54 0%, #bb6dec 100%)">
-    <div class="column">
-      <div class="row">
-        <q-card square dark class="q-pa-md q-ma-none no-shadow bg-grey-10" style="width: 320px">
-          <q-card-section class="q-mt-xl q-mb-md">
-            <p class="text-weight-bolder text-grey">Login to your account</p>
-          </q-card-section>
-          <q-card-section>
-            <q-form class="q-gutter-md">
-              <q-input dark dense square filled clearable v-model="username" type="text" label="Username">
-                <template v-slot:prepend>
-                  <q-icon name="eva-person-outline" />
-                </template>
-              </q-input>
-              <q-input dark dense square filled clearable v-model="password" type="password" label="Password">
-                <template v-slot:prepend>
-                  <q-icon name="lock" />
-                </template>
-              </q-input>
-            </q-form>
-          </q-card-section>
-          <q-card-actions>
-            <div class="row full-width items-center q-mb-xl">
-              <div class="col-12">
-                <q-btn outline rounded size="md" color="red-4" class="full-width text-white" label="Sign In" />
-              </div>
-              <!-- <div class="col-6">
-                <p class="text-no-wrap text-grey text-caption text-right">Forgot password?</p>
-              </div> -->
-            </div>
-          </q-card-actions>
-          <!-- <q-card-section>
-            <p class="text-caption text-weight-light text-grey">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce semper laoreet placerat. Nullam semper auctor justo, rutrum posuere odio vulputate
-              nec.
+  <div class="flex justify-center items-center q-electron-drag" style="height: 100%">
+    <div class="row base-card-shadow electron-hide" style="width: 60vw; min-width: 300px">
+      <div class="col-6 flex justify-center items-center" v-show="$q.screen.gt.sm">
+        <q-img
+          width="100%"
+          height="100%"
+          src="https://images.unsplash.com/photo-1654097512267-9281e2f76e8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+        >
+        </q-img>
+      </div>
+      <q-separator vertical inset v-if="$q.screen.gt.sm" />
+      <div class="col flex justify-center items-center">
+        <q-card square style="min-width: 290px; height: 100%; width: 60%" class="no-shadow">
+          <q-card-section class="text-center">
+            <h3 class="text-uppercase">Login</h3>
+            <!-- User -->
+            <q-input clearable autofocus bottom-slots v-model="store.User.UserName" label="User">
+              <template v-slot:prepend>
+                <q-icon name="account_circle" />
+              </template>
+            </q-input>
+            <!-- Password -->
+            <q-input bottom-slots v-model="store.User.Password" label="Password" :type="store.Option.ShowPassword ? 'password' : 'text'" hint="">
+              <template v-slot:prepend>
+                <q-icon name="vpn_key" />
+              </template>
+              <template v-slot:append>
+                <q-icon
+                  :name="store.Option.ShowPassword ? 'visibility_off' : 'visibility'"
+                  class="cursor-pointer"
+                  @click="store.Option.ShowPassword = !store.Option.ShowPassword"
+                />
+              </template>
+            </q-input>
+
+            <!-- button login -->
+            <q-btn
+              :loading="store.Option.Loading"
+              class="logon-btn bg-logon-card-input"
+              text-color="white"
+              label="Login"
+              style="font-size: large"
+              @click="login"
+            >
+            </q-btn>
+            <p class="text-grey q-mt-lg">
+              Developed with
+              <q-icon size="sm" name="las la-heartbeat" color="pink" class="q-mr-sm q-ml-sm"></q-icon>+
+              <q-icon size="sm" name="lab la-vuejs" color="green" class="q-mr-sm"></q-icon>
             </p>
-          </q-card-section> -->
+          </q-card-section>
         </q-card>
       </div>
     </div>
-  </q-page>
+  </div>
 </template>
 
-<script>
-export default {
-  name: 'Login',
-  data() {
-    return {
-      email: '',
-      username: '',
-      password: '',
-    };
-  },
+<script setup lang="ts">
+//import
+import { useRouter } from 'vue-router';
+import { useQuasar } from 'quasar';
+import { useLoginStore } from '../stores/Login/index';
+//user
+const $q = useQuasar();
+const $router = useRouter();
+const store = useLoginStore();
+
+const login = () => {
+  store.toggleLoading();
+  //for dev
+  if (store.User.UserName === 'admin') {
+    const lt = setTimeout(() => {
+      $router.push('/home').then(() => {
+        clearTimeout(lt);
+        store.Option.Loading = !store.Option;
+      });
+    }, Math.random() * 4000);
+  } else {
+    store.toggleLoading();
+  }
 };
 </script>
 
-<style></style>
+<style scoped>
+.base-card-shadow {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px 0px;
+  border-radius: 4px;
+}
+
+.logon-btn {
+  font-size: large;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.bg-logon-card-input {
+  background: linear-gradient(to right, #36d1dc 1%, #5b86e5 99%);
+  transition: all 0.3s ease-in-out;
+  background-size: 200% auto;
+  margin-top: 10px;
+}
+
+.bg-logon-card-input:hover {
+  background-position: right center;
+  box-shadow: 0 12px 20px -11px #5b86e5;
+}
+</style>
