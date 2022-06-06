@@ -12,20 +12,10 @@ export const useLoginStore = defineStore('loginStore', {
       ShowPassword: false,
     },
   }),
-  getters: {
-    // user: (User) => User,
-    // option: (Option) => Option,
-  },
+  getters: {},
   actions: {
     toggleLoading() {
       this.Option.Loading = !this.Option.Loading;
     },
-    // Add(menu: Menu) {
-    //   this.Menus.push(menu);
-    // },
-    // ToggleDrawer() {
-    //   console.log('ToggleDrawerOpen: ', this.DrawerOpen);
-    //   this.DrawerOpen = !this.DrawerOpen;
-    // },
   },
 });
