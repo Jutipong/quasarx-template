@@ -10,15 +10,26 @@
         rowsPerPage: 15,
       }"
     >
-      <template v-slot:top-right>
-        <q-btn color="primary" icon-right="archive" label="Export to csv" no-caps @click="exportTable" />
+      <template v-slot:top="props">
+        <div class="col-4 q-table__title">
+          <q-icon name="eva-list-outline" />
+          Result
+        </div>
+        <!-- <q-space /> -->
+        <q-space />
+        <q-btn flat class="q-ml-md xs-hide sm-hide" round :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'" @click="props.toggleFullscreen" />
+        <q-separator vertical spaced />
+        <q-btn color="primary" icon-right="eva-plus-circle-outline" label="Add" no-caps @click="exportTable" />
       </template>
+      <!-- <template v-slot:top-right>
+        <q-btn color="primary" icon-right="eva-plus-circle-outline" label="Add" no-caps @click="exportTable" />
+      </template> -->
     </q-table>
   </div>
 </template>
 
 <script>
-import { exportFile, useQuasar } from 'quasar';
+import { useQuasar } from 'quasar';
 
 const columns = [
   {
@@ -142,22 +153,6 @@ const rows = [
   },
 ];
 
-function wrapCsvValue(val, formatFn, row) {
-  let formatted = formatFn !== void 0 ? formatFn(val, row) : val;
-
-  formatted = formatted === void 0 || formatted === null ? '' : String(formatted);
-
-  formatted = formatted.split('"').join('""');
-  /**
-   * Excel accepts \n and \r in strings, but some other CSV parsers do not
-   * Uncomment the next two lines to escape new lines
-   */
-  // .split('\n').join('\\n')
-  // .split('\r').join('\\r')
-
-  return `"${formatted}"`;
-}
-
 export default {
   setup() {
     const $q = useQuasar();
@@ -165,31 +160,6 @@ export default {
     return {
       columns,
       rows,
-
-      exportTable() {
-        // naive encoding to csv format
-        const content = [columns.map((col) => wrapCsvValue(col.label))]
-          .concat(
-            rows.map((row) =>
-              columns
-                .map((col) =>
-                  wrapCsvValue(typeof col.field === 'function' ? col.field(row) : row[col.field === void 0 ? col.name : col.field], col.format, row)
-                )
-                .join(',')
-            )
-          )
-          .join('\r\n');
-
-        const status = exportFile('table-export.csv', content, 'text/csv');
-
-        if (status !== true) {
-          $q.notify({
-            message: 'Browser denied file download...',
-            color: 'negative',
-            icon: 'warning',
-          });
-        }
-      },
     };
   },
 };

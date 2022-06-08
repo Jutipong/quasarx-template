@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-sm">
-    <h1>{{ Msg }}</h1>
+    <!-- <h1>{{ Msg }}</h1> -->
     <Table />
   </q-page>
 </template>
