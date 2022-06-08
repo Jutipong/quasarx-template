@@ -11,7 +11,7 @@ export default defineComponent({
 </script>
 
 <style>
-@import './assets/css/transition.css';
+/* @import './assets/css/transition.css'; */
 /* @import "./assets/css/main.css";
    */
 /* @import './assets/css/cimo.css'; */

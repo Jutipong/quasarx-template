@@ -1,5 +1,6 @@
 <template>
-  <q-layout view="hHh lpR fFf" class="bg-grey-1">
+  <!-- <q-layout view="hHh lpR fFf" class="bg-grey-1"> -->
+  <q-layout view="hHh LpR fFf" class="bg-grey-1">
     <!-- HEADER START -->
     <q-header elevated class="bg-primary text-white">
       <!-- toolbar - title -->
@@ -32,19 +33,19 @@
       <Menus />
     </q-drawer>
 
-    <!-- <q-page-container>
+    <q-page-container>
       <router-view />
-    </q-page-container> -->
+    </q-page-container>
 
     <!-- container START -->
 
-    <q-page-container class="app-main full-height">
-      <!-- <transition name="fade-transform" mode="out-in"> -->
-      <!-- <keep-alive :max="10" :include="keepAliveList"> -->
-      <router-view :key="$route.fullPath" />
-      <!-- </keep-alive> -->
-      <!-- </transition> -->
-    </q-page-container>
+    <!-- <q-page-container class="app-main full-height"> -->
+    <!-- <transition name="fade-transform" mode="out-in"> -->
+    <!-- <keep-alive :max="10" :include="keepAliveList"> -->
+    <!-- <router-view :key="$route.fullPath" /> -->
+    <!-- </keep-alive> -->
+    <!-- </transition> -->
+    <!-- </q-page-container> -->
     <!-- container END -->
   </q-layout>
 </template>

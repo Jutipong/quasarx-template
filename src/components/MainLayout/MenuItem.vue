@@ -62,7 +62,7 @@ export default {
   computed: {
     baseItemClassWithNoChildren() {
       return (path) => {
-        const p = this.$route.fullPath.split(`/`);
+        const p = this.$route.fullPath.split('/');
         if (p && p.length == 3) {
           return `/${p[1]}` === path ? 'baseRootItemActive MenuItem' + this.baseItemClass : this.baseItemClass;
         } else {
@@ -82,7 +82,7 @@ export default {
       if (link.indexOf('http') !== -1) {
         return '#';
       }
-      return link.replace(`//`, `/`);
+      return link.replace('//', '/');
     },
   },
   watch: {

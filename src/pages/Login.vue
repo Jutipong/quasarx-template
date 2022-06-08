@@ -11,46 +11,63 @@
       </div>
       <q-separator vertical inset v-if="$q.screen.gt.sm" />
       <div class="col flex justify-center items-center">
-        <q-card square style="min-width: 290px; height: 100%; width: 60%" class="no-shadow">
-          <q-card-section class="text-center">
-            <h3 class="text-uppercase">Login</h3>
-            <!-- User -->
-            <q-input clearable autofocus bottom-slots v-model="store.User.UserName" label="User">
-              <template v-slot:prepend>
-                <q-icon name="account_circle" />
-              </template>
-            </q-input>
-            <!-- Password -->
-            <q-input bottom-slots v-model="store.User.Password" label="Password" :type="store.Option.ShowPassword ? 'password' : 'text'" hint="">
-              <template v-slot:prepend>
-                <q-icon name="vpn_key" />
-              </template>
-              <template v-slot:append>
-                <q-icon
-                  :name="store.Option.ShowPassword ? 'visibility_off' : 'visibility'"
-                  class="cursor-pointer"
-                  @click="store.Option.ShowPassword = !store.Option.ShowPassword"
-                />
-              </template>
-            </q-input>
+        <q-form @submit="login" :greedy="true">
+          <q-card square style="min-width: 290px; height: 100%; width: 60%" class="no-shadow">
+            <q-card-section class="text-center">
+              <h3 class="text-uppercase">Login</h3>
+              <!-- User -->
+              <q-input
+                autofocus
+                bottom-slots
+                label="User"
+                v-model="store.User.UserName"
+                :attributes="{ tabindex: '0' }"
+                :rules="[(val) => !!val || '']"
+              >
+                <template v-slot:prepend>
+                  <q-icon name="account_circle" />
+                </template>
+              </q-input>
+              <!-- Password -->
+              <q-input
+                bottom-slots
+                hint=""
+                v-model="store.User.Password"
+                label="Password"
+                :attributes="{ tabindex: '1' }"
+                :type="store.Option.ShowPassword ? 'text' : 'password'"
+                :rules="[(val) => !!val || '']"
+              >
+                <template v-slot:prepend>
+                  <q-icon name="vpn_key" />
+                </template>
+                <template v-slot:append>
+                  <q-icon
+                    :name="!store.Option.ShowPassword ? 'visibility_off' : 'visibility'"
+                    class="cursor-pointer"
+                    @click="store.Option.ShowPassword = !store.Option.ShowPassword"
+                  />
+                </template>
+              </q-input>
 
-            <!-- button login -->
-            <q-btn
-              :loading="store.Option.Loading"
-              class="logon-btn bg-logon-card-input"
-              text-color="white"
-              label="Login"
-              style="font-size: large"
-              @click="login"
-            >
-            </q-btn>
-            <p class="text-grey q-mt-lg">
-              Developed with
-              <q-icon size="sm" name="las la-heartbeat" color="pink" class="q-mr-sm q-ml-sm"></q-icon>+
-              <q-icon size="sm" name="lab la-vuejs" color="green" class="q-mr-sm"></q-icon>
-            </p>
-          </q-card-section>
-        </q-card>
+              <!-- button login -->
+              <q-btn
+                :loading="store.Option.Loading"
+                class="logon-btn bg-logon-card-input"
+                text-color="white"
+                label="Login"
+                style="font-size: large"
+                type="submit"
+              >
+              </q-btn>
+              <p class="text-grey q-mt-lg">
+                Developed with
+                <q-icon size="sm" name="las la-heartbeat" color="pink" class="q-mr-sm q-ml-sm"></q-icon>+
+                <q-icon size="sm" name="lab la-vuejs" color="green" class="q-mr-sm"></q-icon>
+              </p>
+            </q-card-section>
+          </q-card>
+        </q-form>
       </div>
     </div>
   </div>
@@ -65,20 +82,15 @@ import { useLoginStore } from '../stores/Login/index';
 const $q = useQuasar();
 const $router = useRouter();
 const store = useLoginStore();
-
 const login = () => {
   store.toggleLoading();
-  //for dev
-  if (store.User.UserName === 'admin') {
-    const lt = setTimeout(() => {
-      $router.push('/home').then(() => {
-        clearTimeout(lt);
-        store.Option.Loading = !store.Option;
-      });
-    }, Math.random() * 4000);
-  } else {
-    store.toggleLoading();
-  }
+  const lt = setTimeout(() => {
+    $router.push('/home').then(() => {
+      clearTimeout(lt);
+      store.toggleLoading();
+      store.$reset();
+    });
+  }, Math.random() * 4000);
 };
 </script>
 
