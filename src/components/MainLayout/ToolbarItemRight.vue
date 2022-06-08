@@ -3,7 +3,7 @@
   <div class="q-gutter-sm row items-center no-wrap">
     <!-- <q-btn round dense flat :icon="this.$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'" v-if="$q.screen.gt.sm" @click="fullScreen"> -->
 
-    <q-btn flat @click="$q.fullscreen.toggle()" :icon="iconFullscreen" :label="lableFullscreen" />
+    <q-btn :ripple="false" flat @click="$q.fullscreen.toggle()" :icon="iconFullscreen" :label="lableFullscreen" />
     <q-separator vertical />
     <!-- <q-btn round flat>
       <q-menu>

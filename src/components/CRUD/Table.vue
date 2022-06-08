@@ -18,7 +18,14 @@
         </div>
         <!-- <q-space /> -->
         <q-space />
-        <q-btn flat class="q-ml-md xs-hide sm-hide" round :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'" @click="props.toggleFullscreen" />
+        <q-btn
+          flat
+          :ripple="false"
+          color="primary"
+          class="q-ml-md xs-hide sm-hide"
+          :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
+          @click="props.toggleFullscreen"
+        />
         <q-separator vertical spaced />
         <q-btn color="primary" icon="eva-plus-circle-outline" label="Add" @click="exportTable" />
       </template>

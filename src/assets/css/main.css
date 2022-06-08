@@ -19,8 +19,8 @@ aside {
   padding: 14px;
 }
 
-.q-btnx{
-  min-width: 120px;
+.q-btn {
+  min-width: 100px;
 }
 
 .btn-search {

@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md">
     <q-card :bordered="true">
-      <q-card-section class="bg-primary text-white" >
+      <q-card-section class="bg-primary text-white">
         <div class="">SEARCH</div>
       </q-card-section>
 
