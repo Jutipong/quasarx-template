@@ -20,19 +20,7 @@
               <q-input :dense="dense" clearable v-model="store.Search.LastNaem" label="LastName" />
             </div>
             <div class="col-12 col-md-3">
-              <q-input :dense="dense" v-model="store.Search.DateStart">
-                <template v-slot:prepend>
-                  <q-icon name="event" class="cursor-pointer">
-                    <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                      <q-date range v-model="rangex" mask="DD-MMYYYY" @range-end="dateEnd">
-                        <div class="row items-center justify-end">
-                          <q-btn v-close-popup label="Close" color="primary" flat />
-                        </div>
-                      </q-date>
-                    </q-popup-proxy>
-                  </q-icon>
-                </template>
-              </q-input>
+              <DateRange />
             </div>
             <div class="col-12 col-md-3">
               <q-select
@@ -60,6 +48,7 @@
 </template>
 
 <script setup lang="ts">
+import DateRange from '../Base/DateRange.vue';
 import { DatePicker } from '../../types/datePicker';
 import { useCrudStore } from '../../stores/CRUD/';
 const store = useCrudStore();

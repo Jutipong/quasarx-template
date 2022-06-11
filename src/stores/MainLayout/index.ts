@@ -4,6 +4,7 @@ import { MainLayout, Menu } from './type';
 export const useMainLayoutStore = defineStore('mainLayout', {
   state: (): MainLayout => ({
     DrawerOpen: true,
+    dense: true,
     Menus: [
       {
         path: '/home',

@@ -1,5 +1,6 @@
 export interface MainLayout {
   DrawerOpen: boolean;
+  dense: boolean;
   Menus: Menu[];
 }
 
