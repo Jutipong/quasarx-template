@@ -27,7 +27,7 @@
           @click="props.toggleFullscreen"
         />
         <q-separator vertical spaced />
-        <q-btn color="primary" icon="eva-plus-circle-outline" label="Add" />
+        <q-btn class="btn-120" color="primary" flat icon="eva-plus-circle-outline" label="Add" />
       </template>
     </q-table>
   </div>

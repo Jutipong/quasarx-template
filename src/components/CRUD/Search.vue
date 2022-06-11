@@ -20,7 +20,19 @@
               <q-input :dense="dense" clearable v-model="store.Search.LastNaem" label="LastName" />
             </div>
             <div class="col-12 col-md-3">
-              <q-input :dense="dense" clearable v-model="store.Search.LastNaem" label="DateTime" />
+              <q-input :dense="dense" v-model="store.Search.DateStart" readonly>
+                <template v-slot:prepend>
+                  <q-icon name="event" class="cursor-pointer">
+                    <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                      <q-date v-model="store.Search.DateStart" mask="DD-MMYYYY">
+                        <div class="row items-center justify-end">
+                          <q-btn v-close-popup label="Close" color="primary" flat />
+                        </div>
+                      </q-date>
+                    </q-popup-proxy>
+                  </q-icon>
+                </template>
+              </q-input>
             </div>
             <div class="col-12 col-md-3">
               <q-select
@@ -36,10 +48,11 @@
           </div>
         </q-card-section>
 
-        <q-card-actions align="right" class="q-pa-md">
+        <q-card-actions class="">
           <q-toggle v-model="dense" label="Dense" />
           <q-space />
-          <q-btn type="submit" class="btn-search" color="primary" icon="eva-search-outline" label="Search" />
+          <q-btn type="button" flat class="btn-120" icon="eva-refresh-outline" label="Clear" color="negative" @click="store.resetSearch" />
+          <q-btn type="submit" flat class="btn-120" color="primary" icon="eva-search-outline" label="Search" />
         </q-card-actions>
       </q-form>
     </q-card>

@@ -11,5 +11,9 @@ export const useCrudStore = defineStore('crudStore', {
     },
   }),
   getters: {},
-  actions: {},
+  actions: {
+    resetSearch() {
+      this.Search = {} as Search;
+    },
+  },
 });
