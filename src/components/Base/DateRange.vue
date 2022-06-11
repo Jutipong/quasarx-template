@@ -15,26 +15,29 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
+//import
+import { watchEffect } from 'vue';
 import { useMainLayoutStore } from '../../stores/MainLayout';
 import { isString } from '@vue/shared';
+
 //use => value || store
 const storeMain = useMainLayoutStore();
-const date = ref({ from: '', to: '' });
-const dateText = ref('');
+let date = $ref({ from: '', to: '' });
+let dateText = $ref('');
 
+//logic
 watchEffect(() => {
-  if (date.value == null) {
-    return (dateText.value = '');
+  if (date == null) {
+    return (dateText = '');
   }
-  if (date.value && isString(date.value)) {
-    return (dateText.value = date.value);
+  if (date && isString(date)) {
+    return (dateText = date);
   }
-  if (date.value && date.value.from && date.value.to) {
-    return (dateText.value = `${date.value.from} - ${date.value.to}`);
+  if (date && date.from && date.to) {
+    return (dateText = `${date.from} - ${date.to}`);
   }
-  return (dateText.value = '');
+  return (dateText = '');
 });
 
-const clear = () => (date.value = { from: '', to: '' });
+const clear = () => (date = { from: '', to: '' });
 </script>
