@@ -12,10 +12,10 @@
       }"
     >
       <template v-slot:top="props">
-        <div class="q-table__title">
-          <q-icon name="eva-list-outline" />
+        <q-chip square>
+          <q-avatar icon="eva-list-outline" color="positive" text-color="white" />
           RESULT
-        </div>
+        </q-chip>
         <!-- <q-space /> -->
         <q-space />
         <q-btn
@@ -27,7 +27,7 @@
           @click="props.toggleFullscreen"
         />
         <q-separator vertical spaced />
-        <q-btn color="primary" icon="eva-plus-circle-outline" label="Add" @click="exportTable" />
+        <q-btn color="primary" icon="eva-plus-circle-outline" label="Add" />
       </template>
     </q-table>
   </div>
