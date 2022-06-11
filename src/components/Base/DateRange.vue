@@ -11,30 +11,24 @@
         </q-popup-proxy>
       </q-icon>
     </template>
-    <!-- 
-    <template v-if="dateText" v-slot:append>
-      <q-icon name="cancel" class="cursor-pointer" @click="clear"></q-icon>
-    </template> -->
   </q-input>
 </template>
 
 <script setup lang="ts">
-import { watch, ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { useMainLayoutStore } from '../../stores/MainLayout';
-// import { DatePicker } from 'src/types/datePicker';
 import { isString } from '@vue/shared';
 //use => value || store
 const storeMain = useMainLayoutStore();
 const date = ref({ from: '', to: '' });
-//
 const dateText = ref('');
 
-watch(date, () => {
+watchEffect(() => {
   if (date.value == null) {
     return (dateText.value = '');
   }
   if (date.value && isString(date.value)) {
-    return date.value;
+    return (dateText.value = date.value);
   }
   if (date.value && date.value.from && date.value.to) {
     return (dateText.value = `${date.value.from} - ${date.value.to}`);
@@ -42,17 +36,5 @@ watch(date, () => {
   return (dateText.value = '');
 });
 
-// const dateText = $computed(() => {
-//   if (date == null) {
-//     return '';
-//   }
-//   if (date && isString(date)) {
-//     return date;
-//   }
-//   if (date && date.from && date.to) {
-//     return `${date.from} - ${date.to}`;
-//   }
-//   return '';
-// });
-const clear = (obj: any) => (date.value = { from: '', to: '' });
+const clear = () => (date.value = { from: '', to: '' });
 </script>
