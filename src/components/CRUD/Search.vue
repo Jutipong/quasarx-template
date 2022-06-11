@@ -20,11 +20,11 @@
               <q-input :dense="dense" clearable v-model="store.Search.LastNaem" label="LastName" />
             </div>
             <div class="col-12 col-md-3">
-              <q-input :dense="dense" v-model="store.Search.DateStart" readonly>
+              <q-input :dense="dense" v-model="store.Search.DateStart">
                 <template v-slot:prepend>
                   <q-icon name="event" class="cursor-pointer">
                     <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                      <q-date v-model="store.Search.DateStart" mask="DD-MMYYYY">
+                      <q-date range v-model="rangex" mask="DD-MMYYYY" @range-end="dateEnd">
                         <div class="row items-center justify-end">
                           <q-btn v-close-popup label="Close" color="primary" flat />
                         </div>
@@ -60,6 +60,7 @@
 </template>
 
 <script setup lang="ts">
+import { DatePicker } from '../../types/datePicker';
 import { useCrudStore } from '../../stores/CRUD/';
 const store = useCrudStore();
 let dense = $ref(true);
@@ -67,13 +68,12 @@ const stringOptions = ['Active', 'InActive'];
 const OnSearch = () => {
   console.log('search');
 };
+const dateStart = (dIn: any) => {
+  console.log('dateStart:', dIn);
+};
+const dateEnd = (dIn: any) => {
+  console.log('dateEnd:', JSON.stringify(dIn));
+};
+
+const rangex = $ref({} as DatePicker);
 </script>
-<!-- 
-<style lang="sass" scoped>
-.row > div
-  padding: 10px 15px
-  background: rgba(86,61,124,.15)
-  border: 1px solid rgba(86,61,124,.2)
-.row + .row
-  margin-top: 1rem
-</style> -->
