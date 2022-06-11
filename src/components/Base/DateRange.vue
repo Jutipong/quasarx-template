@@ -19,24 +19,40 @@
 </template>
 
 <script setup lang="ts">
+import { watch, ref } from 'vue';
 import { useMainLayoutStore } from '../../stores/MainLayout';
 // import { DatePicker } from 'src/types/datePicker';
 import { isString } from '@vue/shared';
 //use => value || store
 const storeMain = useMainLayoutStore();
-let date = $ref({ from: '', to: '' });
+const date = ref({ from: '', to: '' });
 //
-const dateText = $computed(() => {
-  if (date == null) {
-    return '';
+const dateText = ref('');
+
+watch(date, () => {
+  if (date.value == null) {
+    return (dateText.value = '');
   }
-  if (date && isString(date)) {
-    return date;
+  if (date.value && isString(date.value)) {
+    return date.value;
   }
-  if (date && date.from && date.to) {
-    return `${date.from} - ${date.to}`;
+  if (date.value && date.value.from && date.value.to) {
+    return (dateText.value = `${date.value.from} - ${date.value.to}`);
   }
-  return '';
+  return (dateText.value = '');
 });
-const clear = (obj: any) => (date = { from: '', to: '' });
+
+// const dateText = $computed(() => {
+//   if (date == null) {
+//     return '';
+//   }
+//   if (date && isString(date)) {
+//     return date;
+//   }
+//   if (date && date.from && date.to) {
+//     return `${date.from} - ${date.to}`;
+//   }
+//   return '';
+// });
+const clear = (obj: any) => (date.value = { from: '', to: '' });
 </script>
