@@ -14,7 +14,7 @@
 
 <script>
 import MenuItem from './MenuItem.vue';
-import { useMainLayoutStore } from '../../stores/mainLayout';
+import { useMainLayoutStore } from '../../stores/main-layout';
 import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'Menus',

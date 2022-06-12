@@ -49,9 +49,9 @@
 
 <script setup lang="ts">
 //impurt
-import { useMainLayoutStore } from '../../stores/mainLayout';
+import { useMainLayoutStore } from '../../stores/main-layout';
 import DateRange from '../Base/DateRange.vue';
-import { DatePicker } from '../../types/datePicker';
+import { DatePicker } from '../../types/date-picker';
 import { useCrudStore } from '../../stores/crud';
 
 //use value || store
