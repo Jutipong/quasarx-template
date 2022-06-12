@@ -14,17 +14,17 @@
         <q-card-section>
           <div class="row q-col-gutter-md">
             <div class="col-12 col-md-3">
-              <q-input :dense="stroeMain.dense" clearable v-model="store.Search.UserName" label="UserName" />
+              <q-input :dense="stroeMain.dense" clearable v-model="obj.UserName" label="UserName" />
             </div>
             <div class="col-12 col-md-3">
-              <q-input :dense="stroeMain.dense" clearable v-model="store.Search.LastNaem" label="LastName" />
+              <q-input :dense="stroeMain.dense" clearable v-model="obj.LastNaem" label="LastName" />
             </div>
             <div class="col-12 col-md-3">
-              <DateRange v-model:startdate="store.Search.DateStart" v-model:enddate="store.Search.DateEnd" />
+              <DateRange v-model:startdate="obj.DateStart" v-model:enddate="obj.DateEnd" />
             </div>
             <div class="col-12 col-md-3">
               <q-select
-                v-model="store.Search.IsStatud"
+                v-model="obj.IsStatud"
                 label="Status"
                 transition-show="scale"
                 transition-hide="scale"
@@ -39,7 +39,7 @@
         <q-card-actions class="">
           <q-toggle v-model="stroeMain.dense" label="stroeMain.dense" />
           <q-space />
-          <q-btn type="button" flat class="btn-120" icon="eva-refresh-outline" label="Clear" color="negative" @click="store.resetSearch" />
+          <q-btn type="button" flat class="btn-120" icon="eva-refresh-outline" label="Clear" color="negative" @click="clear" />
           <q-btn type="submit" flat class="btn-120" color="primary" icon="eva-search-outline" label="Search" />
         </q-card-actions>
       </q-form>
@@ -51,22 +51,25 @@
 //impurt
 import { useMainLayoutStore } from '../../stores/main-layout';
 import DateRange from '../Base/DateRange.vue';
-// import { Prop } from '../../types/date-range';
 import { useCrudStore } from '../../stores/crud';
+import { Search } from 'src/types/crud';
+import { watch } from 'vue';
 
 //use value || store
 const stroeMain = useMainLayoutStore();
 const store = useCrudStore();
+let obj = $ref({} as Search);
 const stringOptions = ['Active', 'InActive'];
 
 //logic
 const OnSearch = () => {
   console.log('search');
 };
-const dateStart = (dIn: any) => {
-  console.log('dateStart:', dIn);
-};
-const dateEnd = (dIn: any) => {
-  console.log('dateEnd:', JSON.stringify(dIn));
+
+const clear = () => {
+  obj = {
+    DateStart: '',
+    DateEnd: '',
+  } as Search;
 };
 </script>
