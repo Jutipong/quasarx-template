@@ -62,7 +62,7 @@ const stringOptions = ['Active', 'InActive'];
 
 //logic
 const OnSearch = () => {
-  console.log('search');
+  console.log('obj :>> ', obj);
 };
 
 const clear = () => {
