@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { MainLayout, Menu } from './type';
+import { MainLayout, Menu } from '../types/main-layout';
 
 export const useMainLayoutStore = defineStore('mainLayout', {
   state: (): MainLayout => ({

@@ -17,7 +17,7 @@
 <script setup lang="ts">
 //import
 import { watchEffect } from 'vue';
-import { useMainLayoutStore } from '../../stores/MainLayout';
+import { useMainLayoutStore } from '../../stores/main-layout';
 import { isString } from '@vue/shared';
 
 //use => value || store
