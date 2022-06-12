@@ -37,7 +37,6 @@ const props = withDefaults(defineProps<DateRangeProp>(), {
   end: '',
 });
 
-const OnClear = () => clear();
 const OnUpdate = (obj: any) => {
   if (obj?.from && obj?.to) {
     emit('update:start', obj.from ?? '');
@@ -51,18 +50,18 @@ const OnUpdate = (obj: any) => {
       dateText = `${obj}`;
       return;
     }
-    clear();
+    OnClear();
     return;
   }
 };
 
 watch(props, () => {
   if (props && props.start === '' && props.end === '') {
-    clear();
+    OnClear();
   }
 });
 
-const clear = () => {
+const OnClear = () => {
   datex = { from: '', to: '' };
   dateText = '';
   emit('update:start', '');
