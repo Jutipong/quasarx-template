@@ -20,7 +20,7 @@
               <q-input :dense="stroeMain.dense" clearable v-model="obj.LastNaem" label="LastName" />
             </div>
             <div class="col-12 col-md-3">
-              <DateRange v-model:startdate="obj.DateStart" v-model:enddate="obj.DateEnd" />
+              <DateRange v-model:start="obj.DateStart" v-model:end="obj.DateEnd" />
             </div>
             <div class="col-12 col-md-3">
               <q-select
@@ -53,7 +53,6 @@ import { useMainLayoutStore } from '../../stores/main-layout';
 import DateRange from '../Base/DateRange.vue';
 import { useCrudStore } from '../../stores/crud';
 import { Search } from 'src/types/crud';
-import { watch } from 'vue';
 
 //use value || store
 const stroeMain = useMainLayoutStore();
@@ -67,9 +66,6 @@ const OnSearch = () => {
 };
 
 const clear = () => {
-  obj = {
-    DateStart: '',
-    DateEnd: '',
-  } as Search;
+  obj = {} as Search;
 };
 </script>
