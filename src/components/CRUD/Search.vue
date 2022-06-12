@@ -20,7 +20,7 @@
               <q-input :dense="stroeMain.dense" clearable v-model="store.Search.LastNaem" label="LastName" />
             </div>
             <div class="col-12 col-md-3">
-              <DateRange />
+              <DateRange v-model:startdate="store.Search.DateStart" v-model:enddate="store.Search.DateEnd" />
             </div>
             <div class="col-12 col-md-3">
               <q-select
@@ -51,7 +51,7 @@
 //impurt
 import { useMainLayoutStore } from '../../stores/main-layout';
 import DateRange from '../Base/DateRange.vue';
-import { DatePicker } from '../../types/date-picker';
+// import { Prop } from '../../types/date-range';
 import { useCrudStore } from '../../stores/crud';
 
 //use value || store
@@ -69,6 +69,4 @@ const dateStart = (dIn: any) => {
 const dateEnd = (dIn: any) => {
   console.log('dateEnd:', JSON.stringify(dIn));
 };
-
-const rangex = $ref({} as DatePicker);
 </script>

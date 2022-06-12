@@ -1,7 +1,7 @@
 export interface Search {
   UserName: string;
   LastNaem: string;
-  DateStart: string | null;
-  DateEnd: string | null;
+  DateStart: string;
+  DateEnd: string;
   IsStatud: boolean;
 }

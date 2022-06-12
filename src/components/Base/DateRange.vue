@@ -16,13 +16,42 @@
 
 <script setup lang="ts">
 //import
-import { watchEffect } from 'vue';
+import { DateRange } from '../../types/date-range';
+import { onActivated, onBeforeMount, onMounted, watchEffect } from 'vue';
 import { useMainLayoutStore } from '../../stores/main-layout';
 import { isString } from '@vue/shared';
+//emit
+const emit = defineEmits(['update:startdate', 'update:enddate']);
+//prop
+interface DateRangeProp {
+  startdate: string;
+  enddate: string;
+}
+const p = defineProps<DateRangeProp>();
+//withDefaults(defineProps<DateRangeProp>(), {
+//   startdate: '',
+//   enddate: '',
+// });
+// defineProps<DateRangeProp>();
+
+onMounted(() => {
+  console.log('onMounted', date);
+  date.from = p.startdate;
+  date.to = p.enddate;
+});
+
+onBeforeMount(() => {
+  console.log('onBeforeMount', date);
+});
+
+onActivated(() => {
+  console.log('onActivated', date);
+});
 
 //use => value || store
 const storeMain = useMainLayoutStore();
-let date = $ref({ from: '', to: '' });
+
+let date = $ref(<DateRange>{ from: '', to: '' });
 let dateText = $ref('');
 let thLocale = $ref({
   /* starting with Sunday */
@@ -37,15 +66,25 @@ let thLocale = $ref({
 
 //logic
 watchEffect(() => {
+  console.log('watch', date);
   if (date == null) {
+    emit('update:startdate', '');
+    emit('update:enddate', '');
     return (dateText = '');
   }
   if (date && isString(date)) {
+    emit('update:startdate', date);
+    emit('update:enddate', '');
     return (dateText = date);
   }
   if (date && date.from && date.to) {
+    emit('update:startdate', date.from);
+    emit('update:enddate', date.to);
     return (dateText = `${date.from} - ${date.to}`);
   }
+
+  emit('update:startdate', '');
+  emit('update:enddate', '');
   return (dateText = '');
 });
 
