@@ -58,19 +58,20 @@ const OnUpdate = (obj: any) => {
   }
 };
 
-// watch([props.start, props.end], () => {
-//   console.log('props', props);
-//   // if (!props.start && !props.end) {
-//   //   OnClear();
-//   // }
-// });
+watch(props, () => {
+  console.log('props', props);
+  // if (!props.start && !props.end) {
+  //   OnClear();
+  // }
+});
 
 onMounted(() => {
   datex.from = props.start;
   datex.to = props.end;
 });
 
-watchEffect(() => {
-  console.log('props :', props);
-});
+// watchEffect(() => {
+//   console.log('props start:', props.start);
+//   console.log('props end:', props.end);
+// });
 </script>
