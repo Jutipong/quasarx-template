@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { Search } from './type';
+import { Search } from '../../types/crud';
 
 export const useCrudStore = defineStore('crudStore', {
   state: () => ({
