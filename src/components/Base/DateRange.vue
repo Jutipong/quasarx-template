@@ -20,7 +20,6 @@ import { Locale_Th } from '../../constant/q-date-picker';
 import { DateRange } from '../../types/date-range';
 import { onMounted, watch, watchEffect } from 'vue';
 import { useMainLayoutStore } from '../../stores/main-layout';
-import { colors } from 'quasar';
 //use => value || store
 const storeMain = useMainLayoutStore();
 let datex = $ref({} as DateRange);
