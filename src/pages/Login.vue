@@ -77,7 +77,7 @@
 //import
 import { useRouter } from 'vue-router';
 import { useQuasar } from 'quasar';
-import { useLoginStore } from '../stores/Login/index';
+import { useLoginStore } from '../stores/login';
 //user
 const $q = useQuasar();
 const $router = useRouter();

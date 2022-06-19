@@ -1,4 +1,4 @@
-.app-main {
+/* .app-main {
   width: 100%;
   position: relative;
 }
@@ -13,4 +13,20 @@
 
 aside {
   top: 86px;
+} */
+
+.q-card__section--vert {
+  padding: 14px;
+}
+
+.btn-100 {
+  width: 120px;
+}
+
+.btn-120 {
+  width: 120px;
+}
+
+.btn-140 {
+  width: 140px;
 }

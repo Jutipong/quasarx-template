@@ -1,5 +1,9 @@
 <template>
-  <q-scroll-area :visible="false" class="fit" :thumb-style="{ right: '0px', borderRadius: '5px', backgroundColor: '#616161', width: '5px' }">
+  <q-scroll-area
+    :visible="false"
+    class="fit"
+    :thumb-style="{ right: '0px', borderRadius: '5px', backgroundColor: '#616161', width: '5px' }"
+  >
     <div>
       <q-list>
         <MenuItem :myRouter="store.menus" :init-level="0" :bg-color="bgColor" :duration="300" :bg-color-level="1" />
@@ -10,7 +14,7 @@
 
 <script>
 import MenuItem from './MenuItem.vue';
-import { useMainLayoutStore } from '../../stores/MainLayout/index';
+import { useMainLayoutStore } from '../../stores/main-layout';
 import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'Menus',

@@ -1,9 +1,10 @@
 import { defineStore } from 'pinia';
-import { MainLayout, Menu } from './type';
+import { MainLayout, Menu } from '../types/main-layout';
 
 export const useMainLayoutStore = defineStore('mainLayout', {
   state: (): MainLayout => ({
     DrawerOpen: true,
+    dense: true,
     Menus: [
       {
         path: '/home',
@@ -117,6 +118,10 @@ export const useMainLayoutStore = defineStore('mainLayout', {
       // },
     ],
   }),
+  persist: {
+    storage: window.localStorage,
+    paths: ['Menus', 'dense'],
+  },
   getters: {
     menus: (state) => state.Menus,
   },

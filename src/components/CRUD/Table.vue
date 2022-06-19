@@ -1,6 +1,7 @@
 <template>
   <div class="q-pa-md">
     <q-table
+      :bordered="true"
       title="Treats"
       :rows="rows"
       :columns="columns"
@@ -11,19 +12,23 @@
       }"
     >
       <template v-slot:top="props">
-        <div class="col-4 q-table__title">
-          <q-icon name="eva-list-outline" />
-          Result
-        </div>
+        <q-chip square>
+          <q-avatar icon="eva-list-outline" color="positive" text-color="white" />
+          RESULT
+        </q-chip>
         <!-- <q-space /> -->
         <q-space />
-        <q-btn flat class="q-ml-md xs-hide sm-hide" round :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'" @click="props.toggleFullscreen" />
+        <q-btn
+          flat
+          :ripple="false"
+          color="primary"
+          class="q-ml-md xs-hide sm-hide"
+          :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
+          @click="props.toggleFullscreen"
+        />
         <q-separator vertical spaced />
-        <q-btn color="primary" icon-right="eva-plus-circle-outline" label="Add" no-caps @click="exportTable" />
+        <q-btn class="btn-120" color="primary" flat icon="eva-plus-circle-outline" label="Add" />
       </template>
-      <!-- <template v-slot:top-right>
-        <q-btn color="primary" icon-right="eva-plus-circle-outline" label="Add" no-caps @click="exportTable" />
-      </template> -->
     </q-table>
   </div>
 </template>

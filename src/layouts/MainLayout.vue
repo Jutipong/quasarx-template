@@ -52,7 +52,7 @@
 <script>
 import ToolbarItemRight from '../components/MainLayout/ToolbarItemRight.vue';
 import Menus from '../components/MainLayout/Menus.vue';
-import { useMainLayoutStore } from '../stores/MainLayout';
+import { useMainLayoutStore } from '../stores/main-layout';
 import { useRouter } from 'vue-router';
 import { useQuasar } from 'quasar';
 import { defineComponent } from 'vue';

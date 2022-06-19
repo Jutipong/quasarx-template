@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia';
-import { Option, Login, User } from './type';
+import { Option, Login, User } from '../types/login';
 
 export const useLoginStore = defineStore('loginStore', {
   state: (): Login => ({
     User: <User>{
       UserName: 'admin',
-      Password: '',
+      Password: '1234',
     },
     Option: <Option>{
       Loading: false,
