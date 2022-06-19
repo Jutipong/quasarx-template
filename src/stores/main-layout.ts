@@ -132,6 +132,14 @@ export const useMainLayoutStore = defineStore('mainLayout', {
     ToggleDrawer() {
       this.DrawerOpen = !this.DrawerOpen;
     },
+    MenusReset() {
+      this.Menus.forEach((item) => {
+        // no children
+        if (!item?.children) {
+          item.meta.active = false;
+        }
+      });
+    },
   },
 });
 

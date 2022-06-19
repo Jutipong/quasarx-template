@@ -4,19 +4,16 @@
       <!-- <q-item-label v-if="item.meta.itemLabel" header class="text-weight-bold text-uppercase" :key="item.meta.itemLabel">
         {{ item.meta.itemLabel }}
       </q-item-label> -->
-
       <!-- no children -->
       <q-item
         v-if="!item.children"
         clickable
         v-ripple
         :key="index"
-        :exact="item.path === '/'"
-        :class="baseItemClass"
         :inset-level="initLevel"
-        :style="isWeChart ? ' line-height: normal' : ''"
         active-class="baseItemActive"
         :to="handleLink(basePath, item.path)"
+        @click="onActive(item.meta)"
       >
         <q-item-section avatar>
           <q-icon :name="item.meta.icon" />
@@ -52,11 +49,13 @@
 </template>
 
 <script>
+import { useMainLayoutStore } from '../../stores/main-layout';
 export default {
   name: 'MenuItem',
   data() {
     return {
       baseItemClass: this.bgColor + '-' + this.bgColorLevel + ' MenuItem',
+      store: useMainLayoutStore(),
     };
   },
   computed: {
@@ -83,6 +82,11 @@ export default {
         return '#';
       }
       return link.replace('//', '/');
+    },
+    // resetMenu() {},
+    onActive(item) {
+      this.store.MenusReset();
+      item.active = true;
     },
   },
 };
