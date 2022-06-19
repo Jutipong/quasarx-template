@@ -23,15 +23,7 @@
               <DateRange v-model:start="obj.DateStart" v-model:end="obj.DateEnd" />
             </div>
             <div class="col-12 col-md-3">
-              <q-select
-                v-model="obj.IsStatud"
-                label="Status"
-                transition-show="scale"
-                transition-hide="scale"
-                :dense="stroeMain.dense"
-                :options="stringOptions"
-                behavior="menu"
-              />
+              <SelectSingle :options="options" v-model="obj.IsStatud" clearable />
             </div>
           </div>
         </q-card-section>
@@ -48,17 +40,17 @@
 </template>
 
 <script setup lang="ts">
-//impurt
-import { useMainLayoutStore } from '../../stores/main-layout';
+//Component
 import DateRange from '../Base/DateRange.vue';
-import { useCrudStore } from '../../stores/crud';
+import SelectSingle from '../Base/SelectSingle.vue';
 import { Search } from 'src/types/crud';
-
-//use value || store
+//Store
+import { useMainLayoutStore } from '../../stores/main-layout';
+import { useCrudStore } from '../../stores/crud';
 const stroeMain = useMainLayoutStore();
-const store = useCrudStore();
+// const store = useCrudStore();
+//Defind value
 let obj = $ref({} as Search);
-const stringOptions = ['Active', 'InActive'];
 
 //logic
 const OnSearch = () => {
@@ -68,4 +60,38 @@ const OnSearch = () => {
 const clear = () => {
   obj = {} as Search;
 };
+
+let options = $ref([
+  {
+    label: 'Google',
+    value: 'goog',
+    description: 'Search engine',
+    icon: 'mail',
+  },
+  {
+    label: 'Facebook',
+    value: 'fb',
+    description: 'Social media',
+    icon: 'bluetooth',
+  },
+  {
+    label: 'Twitter',
+    value: 'twt',
+    description: 'Quick updates',
+    icon: 'map',
+  },
+  {
+    label: 'Apple',
+    value: 'app',
+    description: 'iStuff',
+    icon: 'golf_course',
+  },
+  {
+    label: 'Oracle',
+    value: 'ora',
+    disable: true,
+    description: 'Databases',
+    icon: 'casino',
+  },
+]);
 </script>

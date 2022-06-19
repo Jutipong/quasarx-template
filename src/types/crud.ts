@@ -3,5 +3,5 @@ export interface Search {
   LastNaem: string;
   DateStart: string;
   DateEnd: string;
-  IsStatud: boolean;
+  IsStatud: string;
 }

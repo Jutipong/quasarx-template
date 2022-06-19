@@ -15,22 +15,24 @@
 </template>
 
 <script setup lang="ts">
-//import
-import { Locale_Th } from '../../constant/q-date-picker';
-import { DateRange } from '../../types/date-range';
-import { onMounted, watch, watchEffect } from 'vue';
-import { useMainLayoutStore } from '../../stores/main-layout';
-//use => value || store
-const storeMain = useMainLayoutStore();
-let datex = $ref({} as DateRange);
-let dateText = $ref('');
-//emit
-const emit = defineEmits(['update:start', 'update:end']);
-//prop
-interface DateRangeProp {
+//Interface
+export interface DateRangeProp {
   start: string;
   end: string;
 }
+//import
+import { Locale_Th } from '../../constant/q-date-picker';
+import { DateRange } from '../../types/date-range';
+import { onMounted, watch } from 'vue';
+//Store
+import { useMainLayoutStore } from '../../stores/main-layout';
+const storeMain = useMainLayoutStore();
+//Value
+let datex = $ref({} as DateRange);
+let dateText = $ref('');
+//Emit
+const emit = defineEmits(['update:start', 'update:end']);
+//Props
 const props = withDefaults(defineProps<DateRangeProp>(), {
   start: '',
   end: '',
