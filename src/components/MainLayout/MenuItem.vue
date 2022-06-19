@@ -24,11 +24,12 @@
       </q-item>
 
       <!-- has children -->
+      <!-- :class="baseItemClassWithNoChildren(item.path)" -->
       <q-expansion-item
         v-else
         v-model="item.meta.active"
         :duration="duration"
-        :class="baseItemClassWithNoChildren(item.path)"
+        :class="initLevel === 0.2 && item.meta.active ? 'baseRootItemActive' : ''"
         :default-opened="item.meta.isOpen"
         :header-inset-level="initLevel"
         :key="initLevel + index"
@@ -59,20 +60,19 @@ export default {
     };
   },
   computed: {
-    baseItemClassWithNoChildren() {
-      return (path) => {
-        const p = this.$route.fullPath.split('/');
-        // if (p && p.length == 3) {
-        //   return `/${p[1]}` === path ? 'baseRootItemActive MenuItem' + this.baseItemClass : this.baseItemClass;
-        // } else {
-        // return this.$route.fullPath.startsWith(path) ? 'baseRootItemActive MenuItem' + this.baseItemClass : this.baseItemClass;
-        // }
-      };
-    },
-
-    isWeChart() {
-      return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1;
-    },
+    // baseItemClassWithNoChildren() {
+    //   return (path) => {
+    //     const p = this.$route.fullPath.split('/');
+    // if (p && p.length == 3) {
+    //   return `/${p[1]}` === path ? 'baseRootItemActive MenuItem' + this.baseItemClass : this.baseItemClass;
+    // } else {
+    // return this.$route.fullPath.startsWith(path) ? 'baseRootItemActive MenuItem' + this.baseItemClass : this.baseItemClass;
+    // }
+    //   };
+    // },
+    // isWeChart() {
+    //   return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1;
+    // },
   },
   props: ['myRouter', 'initLevel', 'bgColor', 'bgColorLevel', 'duration', 'basePath'],
   methods: {
