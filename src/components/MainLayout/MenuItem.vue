@@ -26,6 +26,7 @@
       <!-- has children -->
       <q-expansion-item
         v-else
+        v-model="item.meta.active"
         :duration="duration"
         :class="baseItemClassWithNoChildren(item.path)"
         :default-opened="item.meta.isOpen"
@@ -33,7 +34,6 @@
         :key="initLevel + index"
         :icon="item.meta.icon"
         :label="item.label"
-        :style="isWeChart ? ' line-height: normal' : ''"
       >
         <!-- menu item indent + 0.2 ; background color depth + 1 ; if the parent menu path exists, splicing the parent menu path -->
         <MenuItem
@@ -62,11 +62,11 @@ export default {
     baseItemClassWithNoChildren() {
       return (path) => {
         const p = this.$route.fullPath.split('/');
-        if (p && p.length == 3) {
-          return `/${p[1]}` === path ? 'baseRootItemActive MenuItem' + this.baseItemClass : this.baseItemClass;
-        } else {
-          return this.$route.fullPath.startsWith(path) ? 'baseRootItemActive MenuItem' + this.baseItemClass : this.baseItemClass;
-        }
+        // if (p && p.length == 3) {
+        //   return `/${p[1]}` === path ? 'baseRootItemActive MenuItem' + this.baseItemClass : this.baseItemClass;
+        // } else {
+        // return this.$route.fullPath.startsWith(path) ? 'baseRootItemActive MenuItem' + this.baseItemClass : this.baseItemClass;
+        // }
       };
     },
 
