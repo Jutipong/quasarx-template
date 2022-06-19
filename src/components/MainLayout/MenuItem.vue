@@ -85,12 +85,6 @@ export default {
       return link.replace('//', '/');
     },
   },
-  watch: {
-    // '$route.fullPath'(newVal, oldVal) {
-    //   console.log('newVal :>> ', newVal);
-    //   console.log('oldVal :>> ', oldVal);
-    // },
-  },
 };
 </script>
 <style lang="sass" scoped>
