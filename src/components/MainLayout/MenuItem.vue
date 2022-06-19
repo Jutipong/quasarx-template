@@ -11,7 +11,7 @@
         v-ripple
         :key="index"
         :inset-level="initLevel"
-        active-class="baseItemActive"
+        :active-class="item.meta.active ? 'baseItemActive' : ''"
         :to="handleLink(basePath, item.path)"
         @click="onActive(item.meta)"
       >
@@ -29,7 +29,7 @@
         v-else
         v-model="item.meta.active"
         :duration="duration"
-        :class="initLevel === 0.2 && item.meta.active ? 'baseRootItemActive' : ''"
+        :class="baseItemClassWithNoChildren(item.path)"
         :default-opened="item.meta.isOpen"
         :header-inset-level="initLevel"
         :key="initLevel + index"
@@ -60,19 +60,21 @@ export default {
     };
   },
   computed: {
-    // baseItemClassWithNoChildren() {
-    //   return (path) => {
-    //     const p = this.$route.fullPath.split('/');
-    // if (p && p.length == 3) {
-    //   return `/${p[1]}` === path ? 'baseRootItemActive MenuItem' + this.baseItemClass : this.baseItemClass;
-    // } else {
-    // return this.$route.fullPath.startsWith(path) ? 'baseRootItemActive MenuItem' + this.baseItemClass : this.baseItemClass;
-    // }
-    //   };
-    // },
-    // isWeChart() {
-    //   return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1;
-    // },
+    baseItemClassWithNoChildren() {
+      return (path) => {
+        const p = this.$route.fullPath.split('/');
+        if (p && p.length == 3) {
+          // let resutl = `/${p[1]}` === path ? 'baseRootItemActive MenuItem' + this.baseItemClass : this.baseItemClass;
+          // console.log(resutl);
+          // return resutl;
+        } else {
+          return this.$route.fullPath.startsWith(path) ? 'baseRootItemActive MenuItem' + this.baseItemClass : this.baseItemClass;
+        }
+      };
+    },
+    isWeChart() {
+      return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1;
+    },
   },
   props: ['myRouter', 'initLevel', 'bgColor', 'bgColorLevel', 'duration', 'basePath'],
   methods: {
@@ -87,6 +89,7 @@ export default {
     onActive(item) {
       this.store.MenusReset();
       item.active = true;
+      console.log('onAcive');
     },
   },
 };

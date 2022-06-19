@@ -137,6 +137,8 @@ export const useMainLayoutStore = defineStore('mainLayout', {
         // no children
         if (!item?.children) {
           item.meta.active = false;
+        } else {
+          item.children.forEach((r) => (r.meta.active = false));
         }
       });
     },
