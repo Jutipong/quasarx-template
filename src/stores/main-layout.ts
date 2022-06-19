@@ -118,6 +118,10 @@ export const useMainLayoutStore = defineStore('mainLayout', {
       // },
     ],
   }),
+  persist: {
+    storage: window.localStorage,
+    paths: ['Menus', 'dense'],
+  },
   getters: {
     menus: (state) => state.Menus,
   },
