@@ -4,19 +4,16 @@
       <!-- <q-item-label v-if="item.meta.itemLabel" header class="text-weight-bold text-uppercase" :key="item.meta.itemLabel">
         {{ item.meta.itemLabel }}
       </q-item-label> -->
-
       <!-- no children -->
       <q-item
         v-if="!item.children"
         clickable
         v-ripple
         :key="index"
-        :exact="item.path === '/'"
-        :class="baseItemClass"
         :inset-level="initLevel"
-        :style="isWeChart ? ' line-height: normal' : ''"
-        active-class="baseItemActive"
+        :active-class="item.meta.active ? 'baseItemActive' : ''"
         :to="handleLink(basePath, item.path)"
+        @click="onActive(item.meta)"
       >
         <q-item-section avatar>
           <q-icon :name="item.meta.icon" />
@@ -27,8 +24,10 @@
       </q-item>
 
       <!-- has children -->
+      <!-- :class="baseItemClassWithNoChildren(item.path)" -->
       <q-expansion-item
         v-else
+        v-model="item.meta.active"
         :duration="duration"
         :class="baseItemClassWithNoChildren(item.path)"
         :default-opened="item.meta.isOpen"
@@ -36,7 +35,6 @@
         :key="initLevel + index"
         :icon="item.meta.icon"
         :label="item.label"
-        :style="isWeChart ? ' line-height: normal' : ''"
       >
         <!-- menu item indent + 0.2 ; background color depth + 1 ; if the parent menu path exists, splicing the parent menu path -->
         <MenuItem
@@ -52,11 +50,13 @@
 </template>
 
 <script>
+import { useMainLayoutStore } from '../../stores/main-layout';
 export default {
   name: 'MenuItem',
   data() {
     return {
       baseItemClass: this.bgColor + '-' + this.bgColorLevel + ' MenuItem',
+      store: useMainLayoutStore(),
     };
   },
   computed: {
@@ -64,13 +64,14 @@ export default {
       return (path) => {
         const p = this.$route.fullPath.split('/');
         if (p && p.length == 3) {
-          return `/${p[1]}` === path ? 'baseRootItemActive MenuItem' + this.baseItemClass : this.baseItemClass;
+          // let resutl = `/${p[1]}` === path ? 'baseRootItemActive MenuItem' + this.baseItemClass : this.baseItemClass;
+          // console.log(resutl);
+          // return resutl;
         } else {
           return this.$route.fullPath.startsWith(path) ? 'baseRootItemActive MenuItem' + this.baseItemClass : this.baseItemClass;
         }
       };
     },
-
     isWeChart() {
       return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1;
     },
@@ -83,6 +84,12 @@ export default {
         return '#';
       }
       return link.replace('//', '/');
+    },
+    // resetMenu() {},
+    onActive(item) {
+      this.store.MenusReset();
+      item.active = true;
+      console.log('onAcive');
     },
   },
 };
