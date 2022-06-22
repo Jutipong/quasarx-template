@@ -82,40 +82,6 @@ export const useMainLayoutStore = defineStore('mainLayout', {
           },
         ],
       },
-      // {
-      //   path: '/menu-1',
-      //   name: 'menu-1',
-      //   meta: {
-      //     roles: [],
-      //     title: '三级菜单',
-      //     icon: 'filter_3',
-      //   },
-      //   component: 'Layout',
-      //   children: [
-      //     {
-      //       path: 'menu-2',
-      //       meta: {
-      //         roles: [],
-      //         title: '菜单 1-1',
-      //         icon: 'filter_2',
-      //         keepAlive: true,
-      //       },
-      //       component: 'Layout',
-      //       children: [
-      //         {
-      //           path: 'menu-3',
-      //           meta: {
-      //             roles: [],
-      //             title: '菜单 1-2',
-      //             icon: 'filter_1',
-      //             keepAlive: true,
-      //           },
-      //           component: 'components/menu3.vue',
-      //         },
-      //       ],
-      //     },
-      //   ],
-      // },
     ],
   }),
   persist: {
