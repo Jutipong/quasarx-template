@@ -104,10 +104,10 @@
     vite "2.9.1"
     webpack-merge "^5.8.0"
 
-"@quasar/extras@^1.14.0":
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/@quasar/extras/-/extras-1.14.0.tgz#cbdb2c8ea8f9ef551adea28592bf9f9f6c1c5165"
-  integrity sha512-4qVLqiKHV8tpvj/VgyxI5FlWCwQvWQzq15xlLeCDpzLOGeJruUXs+QCAB5gFgdDHPbU2ax2YgAxyGoQSCS7ACw==
+"@quasar/extras@^1.14.1":
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/@quasar/extras/-/extras-1.14.1.tgz#f648a34839e8ec21337d559da3074b8d6f4a2964"
+  integrity sha512-e8l3LCXVd13HqVDgiLpLP+D+aNpISASnzXXnQhtsAhFjp9VDL5xnwB6BOcvrmMe2LFRjleYdsD9Nrd+MiJiiDA==
 
 "@quasar/fastclick@1.1.5":
   version "1.1.5"
@@ -2288,10 +2288,10 @@ qs@6.10.3:
   dependencies:
     side-channel "^1.0.4"
 
-quasar@^2.7.2:
-  version "2.7.2"
-  resolved "https://registry.yarnpkg.com/quasar/-/quasar-2.7.2.tgz#af9d3d22c04ee02787ba8517d7e5d99e3296e3d6"
-  integrity sha512-UbDgFTYRVaruzB+3w5EN6lxzwWNNdtganE4e6QObAoj+w1lWAei3/KEGlXdA3WTGUx7qqhbMpXMaSMSAwvv7NA==
+quasar@^2.7.3:
+  version "2.7.3"
+  resolved "https://registry.yarnpkg.com/quasar/-/quasar-2.7.3.tgz#ff57ac5f3c9a8fdc345f59362d7b0f45c80bc68d"
+  integrity sha512-4YQQP1FbfshXwav9QcOHpvSg4eME4iKzd85m4562EqcfuhRtycC/2WQg+cRxlEr43gEHM0uXaJmybNUWZpoYkw==
 
 queue-microtask@^1.2.2:
   version "1.2.3"
