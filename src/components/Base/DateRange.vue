@@ -17,8 +17,8 @@
 <script setup lang="ts">
 //Interface
 export interface DateRangeProp {
-  start: string;
-  end: string;
+  start: string | null;
+  end: string | null;
 }
 //import
 import { Locale_Th } from '../../constant/q-date-picker';
@@ -28,26 +28,21 @@ import { onMounted, watch } from 'vue';
 import { useMainLayoutStore } from '../../stores/main-layout';
 const storeMain = useMainLayoutStore();
 //Value
-let datex = $ref({} as DateRange);
-let dateText = $ref('');
-//Emit
 const emit = defineEmits(['update:start', 'update:end']);
-//Props
-const props = withDefaults(defineProps<DateRangeProp>(), {
-  start: '',
-  end: '',
-});
+const props = withDefaults(defineProps<DateRangeProp>(), { start: null, end: null });
+let datex = $ref({} as DateRange);
+let dateText = $ref<string | null>('');
 
 const OnUpdate = (obj: any) => {
   if (obj?.from && obj?.to) {
-    emit('update:start', obj.from ?? '');
-    emit('update:end', obj.to ?? '');
-    obj.from && obj.to ? (dateText = `${obj.from} - ${obj.to}`) : (dateText = '');
+    emit('update:start', obj.from ?? null);
+    emit('update:end', obj.to ?? null);
+    obj.from && obj.to ? (dateText = `${obj.from} - ${obj.to}`) : (dateText = null);
     return;
   } else {
     if (obj) {
       emit('update:start', obj);
-      emit('update:end', '');
+      emit('update:end', null);
       dateText = `${obj}`;
       return;
     }
@@ -57,16 +52,16 @@ const OnUpdate = (obj: any) => {
 };
 
 watch(props, () => {
-  if (props && props.start === '' && props.end === '') {
+  if (props && props.start === null && props.end === null) {
     OnClear();
   }
 });
 
 const OnClear = () => {
-  datex = { from: '', to: '' };
-  dateText = '';
-  emit('update:start', '');
-  emit('update:end', '');
+  datex = { from: null, to: null };
+  dateText = null;
+  emit('update:start', null);
+  emit('update:end', null);
 };
 
 onMounted(() => {
