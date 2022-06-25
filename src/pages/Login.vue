@@ -16,14 +16,8 @@
             <q-card-section class="text-center">
               <h3 class="text-uppercase">Login</h3>
               <!-- User -->
-              <q-input
-                autofocus
-                bottom-slots
-                label="User"
-                v-model="store.User.UserName"
-                :attributes="{ tabindex: '0' }"
-                :rules="[(val) => !!val || '']"
-              >
+              <q-input autofocus bottom-slots label="User" v-model="store.User.UserName" :rules="[(val) => !!val || '']">
+                <!-- :attributes="{ tabindex: '0' }" -->
                 <template v-slot:prepend>
                   <q-icon name="account_circle" />
                 </template>
@@ -34,10 +28,10 @@
                 hint=""
                 v-model="store.User.Password"
                 label="Password"
-                :attributes="{ tabindex: '1' }"
                 :type="store.Option.ShowPassword ? 'text' : 'password'"
                 :rules="[(val) => !!val || '']"
               >
+                <!-- :attributes="{ tabindex: '1' }" -->
                 <template v-slot:prepend>
                   <q-icon name="vpn_key" />
                 </template>
