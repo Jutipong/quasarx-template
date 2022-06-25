@@ -23,23 +23,19 @@
 
 <script setup lang="ts">
 //interface
-export interface SelectSingle {
-  label: string;
-  value: any;
-  disable?: boolean;
-}
-export interface SelectSingleProps {
-  modelValue: any;
+export interface Props {
+  modelValue: string | null;
   options: SelectSingle[];
 }
+import { SelectSingle } from 'src/types/select-single';
 import { watch } from 'vue';
 //import
 import { useMainLayoutStore } from '../../stores/main-layout';
 const storeMain = useMainLayoutStore();
 const emit = defineEmits(['update:modelValue']);
-const props = withDefaults(defineProps<SelectSingleProps>(), { modelValue: null });
+const props = withDefaults(defineProps<Props>(), { modelValue: null });
 let model = $ref<string | null>(null);
-let options = $ref(props.options);
+let options = $ref<SelectSingle[]>(props.options);
 
 watch(
   () => model,
