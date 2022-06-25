@@ -14,16 +14,16 @@
         <q-card-section>
           <div class="row q-col-gutter-md">
             <div class="col-12 col-md-3">
-              <q-input :dense="stroeMain.dense" clearable v-model="obj.UserName" label="UserName" />
+              <q-input :dense="stroeMain.dense" clearable v-model="search.UserName" label="UserName" />
             </div>
             <div class="col-12 col-md-3">
-              <q-input :dense="stroeMain.dense" clearable v-model="obj.LastNaem" label="LastName" />
+              <q-input :dense="stroeMain.dense" clearable v-model="search.LastNaem" label="LastName" />
             </div>
             <div class="col-12 col-md-3">
-              <DateRange v-model:start="obj.DateStart" v-model:end="obj.DateEnd" />
+              <DateRange v-model:start="search.DateStart" v-model:end="search.DateEnd" />
             </div>
             <div class="col-12 col-md-3">
-              <SelectSingle :options="options" v-model="obj.IsStatud" clearable />
+              <SelectSingle :options="options" v-model="search.IsStatud" clearable />
             </div>
           </div>
         </q-card-section>
@@ -40,28 +40,21 @@
 </template>
 
 <script setup lang="ts">
-//Component
 import DateRange from '../Base/DateRange.vue';
 import SelectSingle from '../Base/SelectSingle.vue';
 import { Search } from 'src/types/crud';
-//Store
 import { useMainLayoutStore } from '../../stores/main-layout';
-// import { useCrudStore } from '../../stores/crud';
+import { SelectSingle as SelectSingle_Type } from 'src/types/select-single';
 const stroeMain = useMainLayoutStore();
-// const store = useCrudStore();
-//Defind value
-let obj = $ref({} as Search);
+let search = $ref({} as Search);
 
-//logic
 const OnSearch = () => {
-  console.log('obj :>> ', obj);
+  console.log('obj :>> ', search);
 };
 
-const clear = () => {
-  obj = {} as Search;
-};
+const clear = () => (search = {} as Search);
 
-let options = $ref([
+const options = $ref<SelectSingle_Type[]>([
   {
     label: 'Google',
     value: 'goog',
@@ -80,14 +73,12 @@ let options = $ref([
   {
     label: 'Apple',
     value: 'app',
-    description: 'iStuff',
     icon: 'golf_course',
   },
   {
     label: 'Oracle',
     value: 'ora',
     disable: true,
-    description: 'Databases',
     icon: 'casino',
   },
 ]);
