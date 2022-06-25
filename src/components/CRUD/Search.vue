@@ -65,19 +65,16 @@ let options = $ref([
   {
     label: 'Google',
     value: 'goog',
-    description: 'Search engine',
     icon: 'mail',
   },
   {
     label: 'Facebook',
     value: 'fb',
-    description: 'Social media',
     icon: 'bluetooth',
   },
   {
     label: 'Twitter',
     value: 'twt',
-    description: 'Quick updates',
     icon: 'map',
   },
   {
